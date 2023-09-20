@@ -1,6 +1,6 @@
 
 ## Projeto Lotes
-- [ ] Usuários
+- [ ] Usuários (TAD)
 	- [ ] Login
 	- [ ] Cadastro
         - [ ] Nome, CPF, endereço, email
@@ -9,14 +9,14 @@
         - [ ] Ordenação da Lista de Usuários (Ordem Alfabética)
         - [ ] Exclusão e Adição de Usuário pelo painel gerencial
     
-- [ ] Clientes
+- [ ] Clientes (TAD)
 	- [ ] Cadastro
 	- [ ] Visualização e gerenciamento
         - [ ] Lista de todos os Clientes
         - [ ] Ordenação da Lista de Clientes (Ordem Alfabética)
         - [ ] Exclusão e Adição de Clientes pelo painel gerencial
     
-- [ ] Lotes
+- [ ] Lotes (TAD) -- > ENZO
 	- [ ] Criação (Metragem, endereço, valor m²)
 	- [ ] Gerenciamento e visualização
         - [ ] Lista de todos os lotes
