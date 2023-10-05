@@ -9,7 +9,7 @@
         - [ ] Ordenação da Lista de Usuários (Ordem Alfabética)
         - [ ] Exclusão e Adição de Usuário pelo painel gerencial
     
-- [ ] Clientes (TAD)
+- [ ] Clientes (TAD) -- > Malcon
 	- [ ] Cadastro
 	- [ ] Visualização e gerenciamento
         - [ ] Lista de todos os Clientes
