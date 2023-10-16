@@ -7,17 +7,18 @@ int tamanho;
 char rua[50];
 int quadra;
 int num;
+int status;
 };
 
 typedef struct Lote lote;
 
 typedef struct No{
 lote valor;
+int pos;
 no* prox;
 }no;
 
 typedef struct listaLotes{
-
 no* inicio;
 
 }listalotes;
@@ -27,6 +28,8 @@ listalotes* crialistalote(){
     l -> inicio = NULL;
     return l;
 }
+
+/*
 int inserelote(listalotes* l, lote a){
     if(l == NULL) return -1;
     if(l->inicio ==  NULL) return 1;
@@ -41,11 +44,24 @@ int inserelote(listalotes* l, lote a){
     cl->valor = a;
     return 0;
 }
+*/
+
+
+
 int buscalote(listalotes* l, lote a);
 int statuslote(listalotes* l, int pos);
 int mudastatus(listalotes* l, int pos);
 int removelote(listalotes* l, int pos);
 void mostrarlotes(listalotes* l);
+void mostrardisponivel(listalotes* l);
+void mostrarreservados(listalotes* l);
+void mostrarvendidos(listalotes* l);
+int mostrarua(listalotes* l, char* rua);
+int mostrapos(listalotes* l, int pos);
+int mostracorretor(listalotes* l, char* creci);
+int mostracliente(listalotes* l, cliente a);
+
+
 
 
 
