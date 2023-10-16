@@ -1,6 +1,6 @@
 
 ## Projeto Lotes
-- [ ] Usuários (TAD)
+- [ ] Usuários (TAD) -- > Murilo & Caue
 	- [ ] Login
 	- [ ] Cadastro
         - [ ] Nome, CPF, endereço, email
