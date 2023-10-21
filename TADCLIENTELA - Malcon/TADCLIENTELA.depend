@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1697913351 source:c:\users\sos mulher\desktop\trabalhoaed1\tadclientela\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"clientela.h"
+
+1697915678 source:c:\users\sos mulher\desktop\trabalhoaed1\tadclientela\clientela.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"clientela.h"
+
+1697914985 c:\users\sos mulher\desktop\trabalhoaed1\tadclientela\clientela.h
+
