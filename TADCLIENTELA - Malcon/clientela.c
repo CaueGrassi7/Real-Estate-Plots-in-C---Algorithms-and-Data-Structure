@@ -260,31 +260,6 @@ int removerClientePosicao(Lista *l, int pos){
 
 //////////////////////////////////////////
 
-int existeClienteCPF(Lista *l, char *cpf){
-
-    if(l == NULL) return 2;
-    if(listaVazia(l) == 0) return 1;
-
-    No *noLista = l->inicio;
-
-    while(noLista != NULL){
-
-        if(strcmp(noLista->pessoa.cpf, cpf) == 0){
-
-            return 0;
-
-        }
-
-        noLista = noLista->prox;
-
-    }
-
-    return 1;
-
-}
-
-//////////////////////////////////////////
-
 int removerClienteInicio(Lista *l){
 
     if(l == NULL) return 2;
@@ -329,6 +304,31 @@ int removerClienteFinal(Lista *l){
     free(noLista);
 
     return 0;
+}
+
+//////////////////////////////////////////
+
+int existeClienteCPF(Lista *l, char *cpf){
+
+    if(l == NULL) return 2;
+    if(listaVazia(l) == 0) return 1;
+
+    No *noLista = l->inicio;
+
+    while(noLista != NULL){
+
+        if(strcmp(noLista->pessoa.cpf, cpf) == 0){
+
+            return 0;
+
+        }
+
+        noLista = noLista->prox;
+
+    }
+
+    return 1;
+
 }
 
 //////////////////////////////////////////
