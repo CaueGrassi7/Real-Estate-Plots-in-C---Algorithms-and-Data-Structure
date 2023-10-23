@@ -2,7 +2,7 @@ typedef struct cliente{
 
     char nome[30];
     char cpf[15];
-    //endereço
+    //endereÃ§o
     //email
 
 }Cliente;
@@ -13,11 +13,15 @@ Lista *criar();
 
 int listaVazia(Lista *l);
 
+int listaCheia(Lista *l);
+
 void limpar(Lista *l);
 
 int adicionarClienteInicio(Lista *l, Cliente c);
 
 int adicionarClienteFinal(Lista *l, Cliente c);
+
+int adicionarClientePosicao(Lista *l, Cliente c, int pos);
 
 int ordemAlfabetica(Lista *l);
 
@@ -26,6 +30,8 @@ int removerClienteCPF(Lista *l, char *cpf);
 int removerClienteInicio(Lista *l);
 
 int removerClienteFinal(Lista *l);
+
+int removerClientePosicao(Lista *l, int pos);
 
 int existeClienteCPF(Lista *l, char *cpf);
 
