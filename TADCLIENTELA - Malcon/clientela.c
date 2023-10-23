@@ -43,6 +43,14 @@ int listaVazia(Lista *l){
 
 //////////////////////////////////////////
 
+int listaCheia(Lista *l){
+
+    return 1;
+
+}
+
+//////////////////////////////////////////
+
 void limpar(Lista *l){
 
     while(listaVazia(l) != 0){
@@ -58,6 +66,7 @@ void limpar(Lista *l){
 int adicionarClienteInicio(Lista *l, Cliente c){
 
     if(l == NULL) return 2;
+    if(listaCheia(l) == 0) return -1;
 
     No *no = (No*) malloc(sizeof(No));
 
@@ -73,6 +82,7 @@ int adicionarClienteInicio(Lista *l, Cliente c){
 int adicionarClienteFinal(Lista *l, Cliente c){
 
     if(l == NULL) return 2;
+    if(listaCheia(l) == 0) return -1;
 
     No *no = (No*) malloc(sizeof(No));
     no->pessoa = c;
@@ -100,24 +110,58 @@ int adicionarClienteFinal(Lista *l, Cliente c){
 
 //////////////////////////////////////////
 
+int adicionarClientePosicao(Lista *l, Cliente c, int pos){
+
+    if(l == NULL) return 2;
+    if(listaCheia(l) == 0) return 1;
+    if(pos < 0) return -2;
+
+    if((listaVazia(l) == 0) || (pos == 0)) return adicionarClienteInicio(l, c);
+
+    No *noLista = l->inicio;
+    int p = 1;
+
+    while((noLista != NULL) && (p < pos)){
+
+        noLista = noLista->prox;
+        p++;
+
+    }
+
+    /*
+    if(pos != p)
+        return -3; //posicao nao encontrada
+    */
+
+    No *no = (No*) malloc(sizeof(No));
+    no->pessoa = c;
+
+    no->prox = noLista->prox;
+    noLista->prox = no;
+
+    return 0;
+}
+
+//////////////////////////////////////////
+
 int ordemAlfabetica(Lista *l){
 
     if(l == NULL) return 2;
-    if(listaVazia(l) == 0) return 1; //Não há o que ordenar
+    if(listaVazia(l) == 0) return 1; //NÃ£o hÃ¡ o que ordenar
     if(tamanho(l) == 1) return 3; //A lista tem apenas um elemento
 
-    No *noAux; //Nó para o primeiro elemento
-    No *noLista; //Nó para o segundo elemento
-    Cliente temp; //espaço temporario para o deslocamento de um cliente
+    No *noAux; //NÃ³ para o primeiro elemento
+    No *noLista; //NÃ³ para o segundo elemento
+    Cliente temp; //espaÃ§o temporario para o deslocamento de um cliente
 
-    for(noAux = l->inicio; noAux != NULL; noAux = noAux->prox){ //o primeiro for controla o primeiro nó até que chegue ao final da lista
+    for(noAux = l->inicio; noAux != NULL; noAux = noAux->prox){ //o primeiro for controla o primeiro nÃ³ atÃ© que chegue ao final da lista
 
-        for(noLista = noAux->prox; noLista != NULL; noLista = noLista->prox){ //o segundo, que fica sempre a frente do primeiro, também anda até o final da lista
+        for(noLista = noAux->prox; noLista != NULL; noLista = noLista->prox){ //o segundo, que fica sempre a frente do primeiro, tambÃ©m anda atÃ© o final da lista
 
-            if(strcmp(noAux->pessoa.nome, noLista->pessoa.nome) > 0){ //se o nó da frente for alfabeticamente menor que o de trás:
+            if(strcmp(noAux->pessoa.nome, noLista->pessoa.nome) > 0){ //se o nÃ³ da frente for alfabeticamente menor que o de trÃ¡s:
 
-                temp = noAux->pessoa; //guarda o de trás em no espaço temporario
-                noAux->pessoa = noLista->pessoa; //passa o da frente pra trás
+                temp = noAux->pessoa; //guarda o de trÃ¡s em no espaÃ§o temporario
+                noAux->pessoa = noLista->pessoa; //passa o da frente pra trÃ¡s
                 noLista->pessoa = temp; //coloca o temporario na frente
 
             }
@@ -170,6 +214,48 @@ int removerClienteCPF(Lista *l, char *cpf){
     }
 
     return 1;
+}
+
+//////////////////////////////////////////
+
+int removerClientePosicao(Lista *l, int pos){
+
+    if(l == NULL) return 2;
+    if(listaVazia(l) == 0) return 1;
+    if(pos < 0) return -2;
+
+    if(pos == 0) return removerClienteInicio(l);
+
+    No *noAux = NULL;
+    No *noLista = l->inicio;
+    int p = 0;
+
+    while((noLista != NULL) && (pos < p)){
+
+        noAux = noLista;
+        noLista = noLista->prox;
+        p++;
+
+    }
+
+    /*
+    if(pos < p)
+        return -3; //posicao nao encontrada
+    */
+
+    if(noAux == NULL){
+
+        l->inicio = noLista->prox;
+        free(noLista);
+        return 0;
+
+    }
+
+    noAux->prox = noLista->prox;
+    free(noLista);
+
+    return 0;
+
 }
 
 //////////////////////////////////////////
