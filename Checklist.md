@@ -16,13 +16,25 @@
         - [ ] Ordenação da Lista de Clientes (Ordem Alfabética)
         - [ ] Exclusão e Adição de Clientes pelo painel gerencial
     
-- [ ] Lotes (TAD) -- > ENZO
-	- [ ] Criação (Metragem, endereço, valor m²)
-	- [ ] Gerenciamento e visualização
-        - [ ] Lista de todos os lotes
-        - [ ] Ordenação da Lista de Lotes (Disponiveis, Reservados, Livres)
-        - [ ] Adição/Exclusão de Lotes
+- [x] Lotes (TAD) -- > ENZO
+	- [X] Criação (Metragem, endereço, valor m²)
+	- [X] Gerenciamento e visualização
+        - [x] Lista de todos os lotes
+        - [x] Ordenação da Lista de Lotes (Disponiveis, Reservados, Livres)
+        - [x] Adição/Exclusão de Lotes
 - [ ] Simulador / Vendas
 	- [ ] Simulador
         - [ ] Concluir venda
-
+- [ ] Main
+      - [ ] Menu de inicio
+      - [ ] Menu de cadastro
+      - [ ] Menu de Login
+      - [ ] Menu de cadastro de cliente
+      - [ ] Menu de cadastro de lotes
+      - [ ] Menu de venda e reserva de lotes
+      - [ ] Menu de alteração cadastral de cliente/ remoção
+      - [ ] Menu sobre
+      - [ ] Menu de simulação de venda
+      - [ ] Menu de registro de ganhos corretor
+      - [ ] Menu de faturamento total dos lotes
+      - [ ] Menu de venda
