@@ -31,7 +31,7 @@
         - [ ] Concluir venda
 - [ ] Main
 	- [ ] Menu de inicio
-        - [ ] Menu de cadastro
+ 	- [ ] Menu de cadastro
         - [ ] Menu de Login
         - [ ] Menu de cadastro de cliente
         - [ ] Menu de cadastro de lotes
