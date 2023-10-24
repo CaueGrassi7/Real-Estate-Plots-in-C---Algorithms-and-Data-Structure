@@ -7,39 +7,39 @@ typedef struct cliente{
 
 }Cliente;
 
-typedef struct lista Lista;
+typedef struct lista listacliente;
 
-Lista *criar();
+listacliente *criar();
 
-int listaVazia(Lista *l);
+int listaVazia(listacliente *l);
 
-int listaCheia(Lista *l);
+int listaCheia(listacliente *l);
 
-void limpar(Lista *l);
+void limpar(listacliente *l);
 
-int adicionarClienteInicio(Lista *l, Cliente c);
+int adicionarClienteInicio(listacliente *l, Cliente c);
 
-int adicionarClienteFinal(Lista *l, Cliente c);
+int adicionarClienteFinal(listacliente *l, Cliente c);
 
-int adicionarClientePosicao(Lista *l, Cliente c, int pos);
+int adicionarClientePosicao(listacliente *l, Cliente c, int pos);
 
-int ordemAlfabetica(Lista *l);
+int ordemAlfabetica(listacliente *l);
 
-int removerClienteCPF(Lista *l, char *cpf);
+int removerClienteCPF(listacliente *l, char *cpf);
 
-int removerClienteInicio(Lista *l);
+int removerClienteInicio(listacliente *l);
 
-int removerClienteFinal(Lista *l);
+int removerClienteFinal(listacliente *l);
 
-int removerClientePosicao(Lista *l, int pos);
+int removerClientePosicao(listacliente *l, int pos);
 
-int existeClienteCPF(Lista *l, char *cpf);
+int existeClienteCPF(listacliente *l, char *cpf);
 
-int retornaClienteCPF(Lista *l, Cliente *retorno, char *cpf);
+int retornaClienteCPF(listacliente *l, Cliente *retorno, char *cpf);
 
-int tamanho(Lista *l);
+int tamanho(listacliente *l);
 
-void mostrar(Lista *l);
+void mostrar(listacliente *l);
 
-void mostrarListaClienteNome(Lista *l, char *nome);
+void mostrarListaClienteNome(listacliente *l, char *nome);
 
