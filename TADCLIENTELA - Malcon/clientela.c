@@ -14,13 +14,13 @@ typedef struct lista{
 
     No *inicio;
 
-}Lista;
+}listacliente;
 
 //////////////////////////////////////////
 
-Lista *criar(){
+listacliente *criar(){
 
-    Lista *l = (Lista*) malloc(sizeof(Lista));
+    listacliente *l = (listacliente*) malloc(sizeof(listacliente));
 
     if(l != NULL){
 
@@ -33,7 +33,7 @@ Lista *criar(){
 
 //////////////////////////////////////////
 
-int listaVazia(Lista *l){
+int listaVazia(listacliente *l){
 
     if(l == NULL) return 2;
     if(l->inicio == NULL) return 0;
@@ -43,7 +43,7 @@ int listaVazia(Lista *l){
 
 //////////////////////////////////////////
 
-int listaCheia(Lista *l){
+int listaCheia(listacliente *l){
 
     return 1;
 
@@ -51,7 +51,7 @@ int listaCheia(Lista *l){
 
 //////////////////////////////////////////
 
-void limpar(Lista *l){
+void limpar(listacliente *l){
 
     while(listaVazia(l) != 0){
 
@@ -63,7 +63,7 @@ void limpar(Lista *l){
 
 //////////////////////////////////////////
 
-int adicionarClienteInicio(Lista *l, Cliente c){
+int adicionarClienteInicio(listacliente *l, Cliente c){
 
     if(l == NULL) return 2;
     if(listaCheia(l) == 0) return -1;
@@ -79,7 +79,7 @@ int adicionarClienteInicio(Lista *l, Cliente c){
 
 //////////////////////////////////////////
 
-int adicionarClienteFinal(Lista *l, Cliente c){
+int adicionarClienteFinal(listacliente *l, Cliente c){
 
     if(l == NULL) return 2;
     if(listaCheia(l) == 0) return -1;
@@ -110,7 +110,7 @@ int adicionarClienteFinal(Lista *l, Cliente c){
 
 //////////////////////////////////////////
 
-int adicionarClientePosicao(Lista *l, Cliente c, int pos){
+int adicionarClientePosicao(listacliente *l, Cliente c, int pos){
 
     if(l == NULL) return 2;
     if(listaCheia(l) == 0) return 1;
@@ -144,7 +144,7 @@ int adicionarClientePosicao(Lista *l, Cliente c, int pos){
 
 //////////////////////////////////////////
 
-int ordemAlfabetica(Lista *l){
+int ordemAlfabetica(listacliente *l){
 
     if(l == NULL) return 2;
     if(listaVazia(l) == 0) return 1; //Não há o que ordenar
@@ -174,7 +174,7 @@ int ordemAlfabetica(Lista *l){
 
 //////////////////////////////////////////
 
-int removerClienteCPF(Lista *l, char *cpf){
+int removerClienteCPF(listacliente *l, char *cpf){
 
     if(l == NULL) return 2;
     if(listaVazia(l) == 0) return 1;
@@ -218,7 +218,7 @@ int removerClienteCPF(Lista *l, char *cpf){
 
 //////////////////////////////////////////
 
-int removerClientePosicao(Lista *l, int pos){
+int removerClientePosicao(listacliente *l, int pos){
 
     if(l == NULL) return 2;
     if(listaVazia(l) == 0) return 1;
@@ -260,7 +260,32 @@ int removerClientePosicao(Lista *l, int pos){
 
 //////////////////////////////////////////
 
-int removerClienteInicio(Lista *l){
+int existeClienteCPF(listacliente *l, char *cpf){
+
+    if(l == NULL) return 2;
+    if(listaVazia(l) == 0) return 1;
+
+    No *noLista = l->inicio;
+
+    while(noLista != NULL){
+
+        if(strcmp(noLista->pessoa.cpf, cpf) == 0){
+
+            return 0;
+
+        }
+
+        noLista = noLista->prox;
+
+    }
+
+    return 1;
+
+}
+
+//////////////////////////////////////////
+
+int removerClienteInicio(listacliente *l){
 
     if(l == NULL) return 2;
     if(listaVazia(l) == 0) return 1;
@@ -283,7 +308,7 @@ int removerClienteInicio(Lista *l){
 
 //////////////////////////////////////////
 
-int removerClienteFinal(Lista *l){
+int removerClienteFinal(listacliente *l){
 
     if(l == NULL) return 2;
     if(listaVazia(l) == 0) return 1;
@@ -308,32 +333,7 @@ int removerClienteFinal(Lista *l){
 
 //////////////////////////////////////////
 
-int existeClienteCPF(Lista *l, char *cpf){
-
-    if(l == NULL) return 2;
-    if(listaVazia(l) == 0) return 1;
-
-    No *noLista = l->inicio;
-
-    while(noLista != NULL){
-
-        if(strcmp(noLista->pessoa.cpf, cpf) == 0){
-
-            return 0;
-
-        }
-
-        noLista = noLista->prox;
-
-    }
-
-    return 1;
-
-}
-
-//////////////////////////////////////////
-
-int retornaClienteCPF(Lista *l, Cliente *retorno, char *cpf){
+int retornaClienteCPF(listacliente *l, Cliente *retorno, char *cpf){
 
     if(l == NULL) return 2;
     if(listaVazia(l) == 0) return 1;
@@ -358,7 +358,7 @@ int retornaClienteCPF(Lista *l, Cliente *retorno, char *cpf){
 
 //////////////////////////////////////////
 
-int tamanho(Lista *l){
+int tamanho(listacliente *l){
 
     if(l == NULL) return 2;
     if(listaVazia(l) == 0) return 0;
@@ -378,11 +378,11 @@ int tamanho(Lista *l){
 
 //////////////////////////////////////////
 
-void mostrar(Lista *l){
+void mostrar(listacliente *l){
 
     if(l != NULL){
 
-        printf("Lista de Clientes:\n\n");
+        printf("listacliente de Clientes:\n\n");
 
         if(listaVazia(l) != 0){
 
@@ -405,11 +405,11 @@ void mostrar(Lista *l){
 
 //////////////////////////////////////////
 
-void mostrarListaClienteNome(Lista *l, char *nome){
+void mostrarListaClienteNome(listacliente *l, char *nome){
 
     if(l != NULL){
 
-        printf("Lista de Clientes com nome %s:\n\n", nome);
+        printf("listacliente de Clientes com nome %s:\n\n", nome);
 
         if(listaVazia(l) != 0){
 
