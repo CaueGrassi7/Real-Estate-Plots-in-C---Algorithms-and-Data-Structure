@@ -12,7 +12,15 @@ void IniciaLogin(listalotes* a, ListaCliente* b, ListaCorretor* c, corretor corr
 
 void MostraLote(listalotes* l);
 
+////
 
+int cadastrarCliente(listacliente *b);
+
+void mostrarCliente(b);
+
+int gerenciarClientes(listacliente *b);
+
+////
 
 int main()
 {
@@ -81,7 +89,7 @@ void IniciaLogin(listalotes* l, ListaCliente* cliente, ListaCorretor* corretorr,
 
             else if(opc == 4) // MostraLote(a);  (FEITO)
                 
-            else if(opc == 5) // GerenciarCliente(b); (FEITO)
+            else if(opc == 5) // gerenciarClientes(b); (FEITO)
             
             else if(opc == 6) // Simulador(l, b, corretorr);
             
@@ -143,3 +151,129 @@ else return MostraLote(l);
 
 
 }
+
+////
+
+int cadastrarCliente(listacliente *b){
+
+    if(b == NULL) return -1;
+
+    system("cls");
+
+    printf("CADASTRO DE CLIENTE:\n");
+
+    Cliente a;
+
+    printf("\nDigite o NOME COMPLETO do cliente: ");
+    setbuf(stdin, NULL);
+    fgets(a.nome, 50, stdin);
+    printf("\nDigite o CPF do cliente (ex: 12345678910): ");
+    setbuf(stdin, NULL);
+    fgets(a.cpf, 15, stdin);
+    printf("\nDigite o endereco do cliente (ex: rua/avenida numero): ");
+    setbuf(stdin, NULL);
+    fgets(a.endereco, 40, stdin);
+    printf("\nDigite o email do cliente (ex: nome@gmail.com): ");
+    setbuf(stdin, NULL);
+    fgets(a.email, 40, stdin);
+
+    if(adicionarClienteFinal(b, a) == 0)
+        printf("\nCliente cadastrado com sucesso!\n\n");
+
+    int op;
+
+    printf("Deseja cadastrar outro cliente:\n1 - sim\n2 - nao\nopcao: ");
+    scanf("%d", &op);
+
+    if(op == 1){
+
+        return cadastrarCliente(b);
+
+    }
+    else{
+
+    return ordemAlfabetica(b);
+
+    }
+
+    return 0;
+
+}
+
+void mostrarCliente(b){
+
+    system("cls");
+
+    int op;
+
+    mostrar(b);
+    printf("0 - Voltar\n");
+    printf("opcao: ");
+    scanf("%d", &op);
+
+    if(op == 0) return 0;
+    else return mostrarCliente(b);
+
+}
+
+int gerenciarClientes(listacliente *b){
+
+    system("cls");
+
+    int op;
+    char cpf[15];
+
+    printf("1 - Adicionar cliente\n2 - Remover cliente\n3 - Mostrar clientes\n4 - Verificar cliente\n5 - Voltar\n");
+    printf("opcao: ");
+    scanf("%d", &op);
+
+    if(op == 1){
+
+        cadastrarCliente(b);
+        return gerenciarClientes(b); //função da main
+
+    }
+
+    if(op == 2){
+
+        system("cls");
+
+        int op;
+
+        printf("Digite o cpf do cliente que deseja remover: ");
+        setbuf(stdin, NULL);
+        fgets(cpf, 15, stdin);
+        if(removerClienteCPF(b, cpf) == 1) printf("\nCPF nao encontrado\n");
+        else printf("\nCliente removido com sucesso!\n");
+
+        printf("\n0 - Voltar\n");
+        printf("opcao: ");
+        scanf("%d", &op);
+
+        return gerenciarClientes(b);
+
+    }
+    if(op == 3){
+
+        mostrarCliente(b); //função da main
+        return gerenciarClientes(b);
+
+    }
+    if(op == 4){
+
+        printf("Digite o cpf do cliente");
+        setbuf(stdin, NULL);
+        fgets(cpf, 15, stdin);
+        if(existeClienteCPF(b, cpf) == 1) printf("CPF nao encontrado");
+        return gerenciarClientes(b);
+
+    }
+    else{
+
+        return 0;
+
+    }
+
+}
+
+////
