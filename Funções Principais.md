@@ -1,7 +1,7 @@
 
 ## Funções Principais
-- [ ] VerificaUsuario(l, usuario, senha) -> TAD CLIENTES
-- [ ] Fazer campo SENHA e CRECI no TAD CLIENTES
+- [ ] VerificaUsuario(l, usuario, senha) -> TAD USUARIO
+- [ ] Fazer campo SENHA e CRECI no TAD USUARIO
 - [ ] LoginUsuario(corretor* a, ListaUsuario* b, char* email)
 - [ ] IniciaLogin(listalotes* l, ListaCliente* cliente, ListaCorretor* corretor, a)
 - [ ] InserirUsuario(l, usuario, senha) -> Criar um tipo corretor, colher os dados e passar para função novoCadastro
