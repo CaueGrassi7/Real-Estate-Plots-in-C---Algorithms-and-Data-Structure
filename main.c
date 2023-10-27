@@ -255,16 +255,37 @@ int gerenciarClientes(listacliente *b){
     }
     if(op == 4){
 
-        printf("Digite o cpf do cliente");
+        system("cls");
+
+        int op;
+
+        printf("Digite o cpf do cliente: ");
         setbuf(stdin, NULL);
         fgets(cpf, 15, stdin);
-        if(existeClienteCPF(b, cpf) == 1) printf("CPF nao encontrado");
+        if(existeClienteCPF(b, cpf) == 1) printf("\nCPF nao encontrado");
+        else printf("\nO Cliente ja esta cadastrado");
+
+        printf("\n0 - Voltar\n");
+        printf("\nopcao: ");
+        scanf("%d", &op);
+
         return gerenciarClientes(b);
+
+    }
+    if(op == 5){
+
+        return 0;
 
     }
     else{
 
-        return 0;
+        int i;
+
+        printf("\nOpcao invalida\n");
+        printf("\n0 - Continuar");
+        printf("\nopcao: ");
+        scanf("%d", &i);
+        return gerenciarClientes(b);
 
     }
 
