@@ -79,25 +79,21 @@ void IniciaLogin(listalotes* l, ListaCliente* cliente, ListaCorretor* corretorr,
     {
         system("cls");
         printf("Seja bem vindo %s!\n", a.nome);
-        printf("O que voce deseja hoje?\n\n1- Cadastrar lote\n2- Cadastrar cliente\n3- Ver clientes\n4- Ver lotes\n5- Gerenciar clientes\n6- Simular Venda\n7- Vender Lote\n8- Ver meu faturamento\n9- Ver faturamento do empreendimento\n10- Sair")
+        printf("O que voce deseja hoje?\n\n1- Cadastrar lote\n2- Gerenciar Clientes\n3- Ver lotes\n4- Simular Venda\n5- Vender Lote\n6- Ver meu faturamento\n7- Ver faturamento do empreendimento\n10- Sair")
 
             if(opc == 1)      //cadastrarlote(a); (FEITO)
 
-            else if(opc == 2) //cadastrarCliente(b); (FEITO)
+            else if(opc == 2) //gerenciarClientes(b); (FEITO)
 
-            else if(opc == 3) // MostraCliente(b); (FEITO)
+            else if(opc == 3) // MostraLote(a); (FEITO)
 
-            else if(opc == 4) // MostraLote(a);  (FEITO)
+            else if(opc == 4) // Simulador(l, b, corretorr);
                 
-            else if(opc == 5) // gerenciarClientes(b); (FEITO)
+            else if(opc == 5) // Venda(l, b, corretorr);
             
-            else if(opc == 6) // Simulador(l, b, corretorr);
+            else if(opc == 6) // FaturamentoCorretor(corretorr, a);
             
-            else if(opc == 7) // Venda(l, b, corretorr);
-            
-            else if(opc == 8) // FaturamentoCorretor(corretorr, a);
-            
-            else if(opc == 9) // FaturamentoTotal(a);
+            else if(opc == 7) // FaturamentoTotal(a);
 
             else printf("Opcao Invalida!\n");
 
