@@ -12,5 +12,5 @@
 - [X] GerenciarCliente(listacliente* b)
 - [ ] Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
 - [ ] Venda(listalotes* a, ListaCliente* b, corretor corretorr)
-- [ ] FaturamentoCorretor(corretor corretorr, listalotes* a)
-- [ ] FaturamentoTotal(listalotes* a)
+- [ ] FaturamentoCorretor(corretor corretorr, listalotes* a) -> Enzo
+- [ ] FaturamentoTotal(listalotes* a) -> Enzo
