@@ -12,15 +12,12 @@ void IniciaLogin(listalotes* a, ListaCliente* b, ListaCorretor* c, corretor corr
 
 void MostraLote(listalotes* l);
 
-////
-
 int cadastrarCliente(listacliente *b);
 
 void mostrarCliente(listacliente *b);
 
 int gerenciarClientes(listacliente *b);
 
-////
 
 int main()
 {
