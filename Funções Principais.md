@@ -1,10 +1,10 @@
 
 ## Funções Principais
-- [ ] VerificaUsuario(l, usuario, senha) -> TAD USUARIO
-- [ ] Fazer campo SENHA e CRECI no TAD USUARIO
-- [ ] LoginUsuario(corretor* a, ListaUsuario* b, char* email)
+- [ ] VerificaUsuario(l, usuario, senha) -> TAD USUARIO -> Murilo
+- [ ] Fazer campo SENHA e CRECI no TAD USUARIO -> Murilo
+- [ ] LoginUsuario(corretor* a, ListaUsuario* b, char* email) -> Murilo
 - [ ] IniciaLogin(listalotes* l, ListaCliente* cliente, ListaCorretor* corretor, a)
-- [ ] InserirUsuario(listacorretor* a, corretor b)
+- [ ] InserirUsuario(listacorretor* a, corretor b) -> Murilo
 - [X] cadastrarlote(listalotes* l)
 - [X] MostraLote(listalotes* l)
 - [X] cadastrarCliente(listacliente* b)
@@ -14,4 +14,4 @@
 - [ ] Simulador(listalotes* a, ListaCliente* b, corretor corretorr) (OPCIONAL) -> Caue
 - [ ] FaturamentoCorretor(corretor corretorr, listalotes* a) -> Enzo
 - [ ] FaturamentoTotal(listalotes* a) -> Enzo
-- [ ] Histórico de vendas (Fazer com pilha)
+- [ ] Histórico de vendas (Fazer com pilha) -> Fazer ao final
