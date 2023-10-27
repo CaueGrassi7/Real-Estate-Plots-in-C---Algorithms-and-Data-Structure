@@ -9,12 +9,12 @@
         - [ ] Ordenação da Lista de Usuários (Ordem Alfabética)
         - [ ] Exclusão e Adição de Usuário pelo painel gerencial
     
-- [ ] Clientes (TAD) -- > Malcon
-	- [ ] Cadastro
-	- [ ] Visualização e gerenciamento
-        - [ ] Lista de todos os Clientes
-        - [ ] Ordenação da Lista de Clientes (Ordem Alfabética)
-        - [ ] Exclusão e Adição de Clientes pelo painel gerencial
+- [x] Clientes (TAD) -- > Malcon
+	- [x] Cadastro
+	- [x] Visualização e gerenciamento
+        - [x] Lista de todos os Clientes
+        - [x] Ordenação da Lista de Clientes (Ordem Alfabética)
+        - [x] Exclusão e Adição de Clientes pelo painel gerencial
     
 - [x] Lotes (TAD) -- > ENZO
 	- [X] Criação (Metragem, endereço, valor m²)
