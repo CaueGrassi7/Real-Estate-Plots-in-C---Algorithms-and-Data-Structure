@@ -16,7 +16,7 @@ void MostraLote(listalotes* l);
 
 int cadastrarCliente(listacliente *b);
 
-void mostrarCliente(b);
+void mostrarCliente(listacliente *b);
 
 int gerenciarClientes(listacliente *b);
 
@@ -108,6 +108,8 @@ void IniciaLogin(listalotes* l, ListaCliente* cliente, ListaCorretor* corretorr,
 
 
 }
+
+
 
  int cadastrarlote(listalotes* l){
      system("cls");
