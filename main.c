@@ -22,7 +22,6 @@ int gerenciarClientes(listacliente *b);
 int main()
 {
 
-
     int opcao;
     listalotes* a = crialistalote();
     listacliente* b = criarlistacliente();
