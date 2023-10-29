@@ -17,6 +17,7 @@ struct Lote
     int status; // SITUAÇÃO ATUAL DO LOTE (1 - LIVRE, 2 - RESERVADO, 3 -  VENDIDO);
     char* cliente;
     char* creci; // CORRETOR RESPONSAVEL
+    float preco;
 };
 typedef struct Lote lote;
 
@@ -56,6 +57,7 @@ int inserelote(listalotes* l, lote a){
     novoLote->prox = NULL;
     novoLote->valor.creci = 0;
     novoLote->valor.cliente = " ";
+    novoLote->valor.preco = 0;
 
     if (l->inicio == NULL || strcmp(a.rua, l->inicio->valor.rua) < 0) {
         // Inserir no início da lista
@@ -449,7 +451,7 @@ void mostracliente(listalotes* l, cliente b){
 }
 
 // FUNÇÃO QUE ALTERA UM LOTE COMO VENDIDO
-int lotevendido(listalotes* l, int id, cliente a, int creci){
+int lotevendido(listalotes* l, int id, cliente a, int creci, float preco){
     if(l == NULL) return 0;
     if(listavazia(l)) return 0;
     no* cl = l->inicio;
@@ -459,6 +461,7 @@ int lotevendido(listalotes* l, int id, cliente a, int creci){
             cl->valor.status = 3;
             cl->valor.cliente = a.nome;
             cl->valor.creci = creci;
+            cl->valor.preco = preco;
             return 1;
         }
         cl = cl->prox;
