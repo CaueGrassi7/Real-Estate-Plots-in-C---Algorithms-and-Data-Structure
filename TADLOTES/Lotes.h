@@ -11,6 +11,7 @@ int num;
 int status;
 char* cliente;
 char* creci;
+float preco;
 };
 
 typedef struct Lote lote;
@@ -43,7 +44,7 @@ void mostrarua(listalotes* l, char* rua);
 void mostraid(listalotes* l, int id);
 void mostracorretor(listalotes* l, char* creci);
 void mostracliente(listalotes* l, cliente a);
-int lotevendido(listalotes* l, int id, cliente a, int creci);
+int lotevendido(listalotes* l, int id, cliente a, int creci, float preco);
 
 
 
