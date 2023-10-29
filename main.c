@@ -18,6 +18,7 @@ void mostrarCliente(listacliente *b);
 
 int gerenciarClientes(listacliente *b);
 
+int Simulador(listalotes* a, ListaCliente* b, corretor corretorr);
 
 int main()
 {
@@ -292,3 +293,143 @@ int gerenciarClientes(listacliente *b){
 }
 
 ////
+int Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
+{
+    int op;
+    //valorDoMetro -> informado pelo corretor 
+    //precoBruto -> calculado pelo sistema 
+    //valorVendido -> depende da forma de pagamento (armazena o valor final da venda)
+    float valorDoMetro, precoBruto, valorVendido;
+    int formaDePagamento, confirmacao;
+    int idLote;
+
+    do
+    {
+        printf("\n1 - Realizar venda\n");
+        printf("2 - Verificar lotes reservados\n");
+        printf("0 - Sair\n");
+        scanf("%d", &op);
+        switch (op)
+        {
+            case 1:
+                system("cls");
+
+                //Dados dos clientes
+                printf("\nLista de clientes:\n");
+                mostrar(b);
+
+                //Dados dos lotes
+                printf("\nLista de lotes disponiveis:\n");
+                mostrardisponiveis(a);
+                printf("ID do lote:");
+                setbuf(stdin, NULL);
+                scanf("%d", &idLote);
+
+                //Orçamento do lote
+                printf("Valor do metro quadrado do lote:");
+                setbuf(stdin, NULL);
+                scanf("%f", &valorDoMetro);
+
+                //Valor do lote
+                precoBruto = (valorDoMetro * (a->lote->area));
+
+                //Formas de pagamento
+                do
+                {
+                    printf("\nFormas de pagamento:\n");
+                    printf("1 - A vista [ 1x de %f])\n", precoBruto);
+                    printf("2 - Parcelado em 2 vezes sem juros [ 2x de %f]\n", precoBruto/2);
+                    printf("3 - Parcelado em 3 vezes sem juros [ 3x de %f]\n", precoBruto/3);
+                    printf("4 - Parcelado em 4 vezes sem juros [ 4x de %f]\n", precoBruto/4);
+                    printf("5 - Parcelado em 5 vezes com juros [ 5x de %f]\n", ((precoBruto) * 1.1)/5);
+                    printf("6 - Parcelado em 6 vezes com juros [ 6x de %f]\n", ((precoBruto) * 1.15)/6);
+                    printf("7 - Parcelado em 7 vezes com juros [ 7x de %f]\n", ((precoBruto) * 1.2)/7);
+                    printf("8 - Parcelado em 8 vezes com juros [ 8x de %f]\n", ((precoBruto) * 1.25)/8);
+                    printf("9 - Parcelado em 9 vezes com juros [ 9x de %f]\n", ((precoBruto) * 1.3)/9);
+                    printf("10 - Parcelado em 10 vezes com juros [ 10x de %f]\n", ((precoBruto) * 1.35)/10);
+                    printf("11 - Parcelado em 11 vezes com juros [ 11x de %f]\n", ((precoBruto) * 1.4)/11);
+                    printf("12 - Parcelado em 12 vezes com juros [ 12x de %f]\n", ((precoBruto) * 1.45)/12);
+                    printf("0 - Sair\n");
+                    setbuf(stdin, NULL);
+                    scanf("%d", &formaDePagamento);
+                    switch (formaDePagamento)
+                    {
+                        case 1:
+                            valorVendido = precoBruto;
+                            break;
+                        case 2:
+                            valorVendido = precoBruto;
+                            break;
+                        case 3:
+                            valorVendido = precoBruto;
+                            break;
+                        case 4:
+                            valorVendido = precoBruto;
+                            break;
+                        case 5:
+                            valorVendido = ((precoBruto) * 1.1);
+                            break;
+                        case 6:
+                            valorVendido = ((precoBruto) * 1.15);
+                            break;
+                        case 7:
+                            valorVendido = ((precoBruto) * 1.2);
+                            break;
+                        case 8:
+                            valorVendido = ((precoBruto) * 1.25);
+                            break;
+                        case 9:
+                            valorVendido = ((precoBruto) * 1.3);
+                            break;
+                        case 10:
+                            valorVendido = ((precoBruto) * 1.35);
+                            break;
+                        case 11:
+                            valorVendido = ((precoBruto) * 1.4);
+                            break;
+                        case 12:
+                            valorVendido = ((precoBruto) * 1.45);
+                            break;    
+                        case 0:
+                            break;
+                        default:
+                            printf("Opcao invalida\n");
+                            break;
+                    }
+                }while  (formaDePagamento != 0);
+
+                //Confirmação da venda
+                printf("\nConfirmar venda?\n");
+                printf("1 - Sim\n");
+                printf("2 - Nao\n");
+                setbuf(stdin, NULL);
+                scanf("%d", &confirmacao);
+                if (confirmacao == 1)
+                {
+                    if (mudaStatus(a, idLote, 3) == 0)
+                    {
+                        printf("Venda realizada com sucesso\n");
+                        return 0;
+                    }
+                    else
+                    {
+                        printf("Erro ao realizar venda\n");
+                        return 1;
+                    }
+                }
+
+                break;
+            case 2:
+                system("cls");
+                printf("\nLista de lotes reservados:\n");
+                mostrarreservados(a);
+                break;
+        
+            default:
+                break;
+        }    
+
+
+    }while (op != 0);
+}
+///
