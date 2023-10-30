@@ -12,6 +12,6 @@
 - [X] GerenciarCliente(listacliente* b)
 - [ ] Venda(listalotes* a, ListaCliente* b, corretor corretorr) -> Caue
 - [ ] Simulador(listalotes* a, ListaCliente* b, corretor corretorr) (OPCIONAL) -> Caue
-- [ ] FaturamentoCorretor(corretor corretorr, listalotes* a) -> Enzo
-- [ ] FaturamentoTotal(listalotes* a) -> Enzo
+- [X] FaturamentoCorretor(corretor corretorr, listalotes* a) -> Enzo
+- [X] FaturamentoTotal(listalotes* a) -> Enzo
 - [ ] Histórico de vendas (Fazer com pilha) -> Fazer ao final
