@@ -20,6 +20,10 @@ int gerenciarClientes(listacliente *b);
 
 int Simulador(listalotes* a, ListaCliente* b, corretor corretorr);
 
+int FaturamentoCorretor(corretor corretorr, listalotes* a)
+
+float FaturamentoTotal(listalotes* a);
+
 int main()
 {
 
@@ -336,6 +340,7 @@ int Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
                 //Formas de pagamento
                 do
                 {
+                    system("cls");
                     printf("\nFormas de pagamento:\n");
                     printf("1 - A vista [ 1x de %f])\n", precoBruto);
                     printf("2 - Parcelado em 2 vezes sem juros [ 2x de %f]\n", precoBruto/2);
@@ -406,7 +411,7 @@ int Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
                 scanf("%d", &confirmacao);
                 if (confirmacao == 1)
                 {
-                    if (mudaStatus(a, idLote, 3) == 0)
+                    if (mudaStatus(a, idLote, 3))
                     {
                         printf("Venda realizada com sucesso\n");
                         return 0;
@@ -432,4 +437,42 @@ int Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
 
     }while (op != 0);
 }
-///
+
+
+int FaturamentoCorretor(corretor corretorr, listalotes* a){
+   
+    system("cls");
+    if (a == NULL) return -1;
+    float v = 0;
+    lote* cl = a->inicio;
+    while(cl!=NULL){
+        
+        if(corretorr.CRECI == (cl->valor).creci) v+= cl->valor.preco;
+        cl = cl->prox;
+        
+    }
+    printf("Seu faturamento total foi de R$ %f\n\n\n\n\nDigite qualquer numero para sair\n", v);
+    scanf("%f", &v);
+
+    return 1;
+
+}
+
+float FaturamentoTotal(listalotes* a){
+    
+    if (a == NULL) return -1;
+    float v = 0;
+    lote* cl = a->inicio;
+    while(cl!=NULL){
+        
+        v+= cl->valor.preco;
+        cl = cl->prox;
+        
+    }
+    printf("O faturamento total do empreendimento foi de R$ %f\n\n\n\n\nDigite qualquer numero para sair\n", v);
+    scanf("%f", &v);
+
+
+    return 1;
+
+}
