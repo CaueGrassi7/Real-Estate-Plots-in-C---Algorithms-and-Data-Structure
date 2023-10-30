@@ -1,7 +1,7 @@
 
 ## Funções Principais
 - [ ] VerificaUsuario(l, usuario, senha) -> TAD USUARIO -> Murilo
-- [ ] Fazer campo SENHA e CRECI no TAD USUARIO -> Murilo
+- [x] Fazer campo SENHA e CRECI no TAD USUARIO -> Murilo
 - [ ] LoginUsuario(corretor* a, ListaUsuario* b, char* email) -> Murilo
 - [ ] IniciaLogin(listalotes* l, ListaCliente* cliente, ListaCorretor* corretor, a)
 - [ ] InserirUsuario(listacorretor* a, corretor b) -> Murilo
