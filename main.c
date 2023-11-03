@@ -333,13 +333,13 @@ int Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
                 //Dados dos lotes
                 printf("\nLista de lotes disponiveis:\n");
                 mostrardisponiveis(a);
-                printf("ID do lote:");
+                printf("ID do lote: ");
                 setbuf(stdin, NULL);
                 scanf("%d", &idLote);
 
 
                 //Orçamento do lote
-                printf("Valor do metro quadrado do lote:");
+                printf("Valor do metro quadrado do lote: ");
                 setbuf(stdin, NULL);
                 scanf("%f", &valorDoMetro);
 
