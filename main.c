@@ -306,6 +306,9 @@ int Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
     float valorDoMetro, precoBruto, valorVendido;
     int formaDePagamento, confirmacao;
     int idLote;
+    char cpfCliente[15];
+    lote *loteaux;
+    Cliente *clienteaux;
 
     do
     {
@@ -321,6 +324,11 @@ int Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
                 //Dados dos clientes
                 printf("\nLista de clientes:\n");
                 mostrar(b);
+                printf("CPF do cliente: ");
+                setbuf(stdin, NULL);
+                fgets(cpfCliente, 15, stdin);
+                retornaClienteCPF(b, clienteaux, cpfCliente);
+
 
                 //Dados dos lotes
                 printf("\nLista de lotes disponiveis:\n");
@@ -328,6 +336,7 @@ int Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
                 printf("ID do lote:");
                 setbuf(stdin, NULL);
                 scanf("%d", &idLote);
+
 
                 //Orçamento do lote
                 printf("Valor do metro quadrado do lote:");
@@ -411,7 +420,7 @@ int Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
                 scanf("%d", &confirmacao);
                 if (confirmacao == 1)
                 {
-                    if (mudaStatus(a, idLote, 3))
+                    if ((lotevendido(a, idLote, clienteaux, corretorr.creci, valorVendido)) == 0);
                     {
                         printf("Venda realizada com sucesso\n");
                         return 0;
@@ -437,7 +446,7 @@ int Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
 
     }while (op != 0);
 }
-
+///
 
 int FaturamentoCorretor(corretor corretorr, listalotes* a){
    
