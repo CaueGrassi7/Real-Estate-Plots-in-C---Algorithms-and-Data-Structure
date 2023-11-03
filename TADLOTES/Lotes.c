@@ -431,7 +431,7 @@ void mostracliente(listalotes* l, cliente b){
 
         while(a != NULL)
         {
-            if(a->valor.cliente == b.noloteme)
+            if(a->valor.cliente == b.nome)
             {
                 int verificador = 0;
                 for(int i=0; i<20; i++)  // FORMATA A RUA EM UM NUMERO MAXIMO DE CARACTERES
@@ -454,7 +454,7 @@ void mostracliente(listalotes* l, cliente b){
 }
 
 // FUNÇÃO QUE ALTERA UM LOTE COMO VENDIDO
-int lotevendido(listalotes* l, int id, cliente a, int creci, float preco){
+int lotevendido(listalotes* l, int id, cliente a, char* creci, float preco){
     if(l == NULL) return 0;
     if(listavazia(l)) return 0;
     nolote* cl = l->inicio;
@@ -462,8 +462,8 @@ int lotevendido(listalotes* l, int id, cliente a, int creci, float preco){
     {
         if((cl->valor).id == id) {
             cl->valor.status = 3;
-            cl->valor.cliente = a.noloteme;
-            cl->valor.creci = creci;
+            cl->valor.cliente = a.nome;
+            strcpy(cl->valor.creci, creci);
             cl->valor.preco = preco;
             return 1;
         }
