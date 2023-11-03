@@ -7,21 +7,22 @@ typedef struct NO no;
 
 typedef struct Lista lista;
 
-lista* criar ();
+lista* criarlistacorretor();
 
-void login ();
+void login();
 
-void visualizarClientes ();
+void visualizarClientes();
 
-int listaVazia (lista* l);
+int listaVazia(lista* l);
 
-int ordenarAlfabetico (lista* l);
+int tamanho(lista* l);
 
+int novoCadastro(lista* l, corretor c);
 
-int tamanho (lista* l);
+int excluirCliente();
 
-int novoCadastro ();
+int VerificaUsuario(lista* l, char* usuario, char* senha);
 
-int excluirCliente ();
+int LoginUsuario(corretor* a, lista* l, char* email);
 
 #endif 

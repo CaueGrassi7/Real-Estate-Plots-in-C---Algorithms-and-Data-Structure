@@ -1,4 +1,7 @@
 #include "Lotes.h"
+#include "clientela.h"
+#include "cliente.h"
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -23,17 +26,17 @@ typedef struct Lote lote;
 
 
 // NÓ DA LISTA
-typedef struct No
+typedef struct nolote
 {
     lote valor;
-    no* prox;
-} no;
+    nolote* prox;
+} nolote;
 
 
 // TIPO LISTA DE LOTES
 typedef struct listaLotes
 {
-    no* inicio;
+    nolote* inicio;
     int cod; // VARIAVEL PARA CONTROLE DE LOTES E PARA ATRIBUIR OS CÓDIGOS DE CADA LOTE.
 } listalotes;
 
@@ -52,29 +55,29 @@ listalotes* crialistalote()
 // INSERÇÃO DO LOTE EM ORDEM (RUA).
 int inserelote(listalotes* l, lote a){
     if(l == NULL) return 0;
-    no* novoLote = (no*)malloc(sizeof(no));
-    novoLote->valor = a;
-    novoLote->prox = NULL;
-    novoLote->valor.creci = 0;
-    novoLote->valor.cliente = " ";
-    novoLote->valor.preco = 0;
+    nolote* nolotevoLote = (nolote*)malloc(sizeof(nolote));
+    nolotevoLote->valor = a;
+    nolotevoLote->prox = NULL;
+    nolotevoLote->valor.creci = 0;
+    nolotevoLote->valor.cliente = " ";
+    nolotevoLote->valor.preco = 0;
 
     if (l->inicio == NULL || strcmp(a.rua, l->inicio->valor.rua) < 0) {
-        // Inserir no início da lista
-        novoLote->prox = l->inicio;
-        l->inicio = novoLote;
+        // Inserir nolote início da lista
+        nolotevoLote->prox = l->inicio;
+        l->inicio = nolotevoLote;
     } 
     else {
-        no* atual = l->inicio;
+        nolote* atual = l->inicio;
         while (atual->prox != NULL && strcmp(a.rua, atual->prox->valor.rua) >= 0) {
             atual = atual->prox;
         }
         // Inserir após o nó 'atual'
-        novoLote->prox = atual->prox;
-        atual->prox = novoLote;
+        nolotevoLote->prox = atual->prox;
+        atual->prox = nolotevoLote;
     }
 
-    novoLote->valor.id == l->cod;
+    nolotevoLote->valor.id == l->cod;
     l->cod++;
     return 1;
 }
@@ -90,7 +93,7 @@ int buscalote(listalotes* l, lote a)
 {
     if(l == NULL) return 0;
     if(listavazia(l)) return 0;
-    no* cl = l->inicio;
+    nolote* cl = l->inicio;
     while(cl!=NULL)
     {
         if((cl->valor).id == a.id) return 1;
@@ -107,7 +110,7 @@ int statuslote(listalotes* l, int id)
 {
     if(l == NULL) return 0;
     if(listavazia(l)) return 0;
-    no* cl = l->inicio;
+    nolote* cl = l->inicio;
     while(cl!=NULL)
     {
         if((cl->valor).id == id) return ((cl->valor).status);
@@ -125,7 +128,7 @@ int mudastatus(listalotes* l, int id, int status)
 {
     if(l == NULL) return 0;
     if(listavazia(l)) return 0;
-    no* cl = l->inicio;
+    nolote* cl = l->inicio;
     while(cl!=NULL)
     {
         if((cl->valor).id == id)
@@ -146,7 +149,7 @@ int removelote(listalotes* l, int id)
 {
     if(l == NULL) return 0;
     if(listavazia(l)) return 0;
-    no* cl = l->inicio;
+    nolote* cl = l->inicio;
     if((cl->valor.id) == id){
         l->inicio = cl->prox;
         free(cl);
@@ -155,7 +158,7 @@ int removelote(listalotes* l, int id)
         {
             if((cl->prox->valor).id == id)
             {
-                no* aux = cl->prox;
+                nolote* aux = cl->prox;
                 cl->prox = cl->prox->prox;
                 free(aux);
                 return 1;
@@ -173,7 +176,7 @@ void mostrarlotes(listalotes* l)
     printf("[ID] [RUA]                [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]\n");
     if(l!=NULL)
     {
-        no* a = l->inicio;
+        nolote* a = l->inicio;
         char* aux = (char*) malloc(sizeof(char)*21);
 
         while(a != NULL)
@@ -206,7 +209,7 @@ void mostrardisponivel(listalotes* l)
     printf("[ID] [RUA]                [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]\n");
     if(l!=NULL)
     {
-        no* a = l->inicio;
+        nolote* a = l->inicio;
         char* aux = (char*) malloc(sizeof(char)*21);
 
         while(a != NULL)
@@ -242,7 +245,7 @@ void mostrarreservados(listalotes* l)
     printf("[ID] [RUA]                [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]\n");
     if(l!=NULL)
     {
-        no* a = l->inicio;
+        nolote* a = l->inicio;
         char* aux = (char*) malloc(sizeof(char)*21);
 
         while(a != NULL)
@@ -279,7 +282,7 @@ void mostrarvendidos(listalotes* l)
     printf("[ID] [RUA]                [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]\n");
     if(l!=NULL)
     {
-        no* a = l->inicio;
+        nolote* a = l->inicio;
         char* aux = (char*) malloc(sizeof(char)*21);
 
         while(a != NULL)
@@ -315,7 +318,7 @@ void mostrarua(listalotes* l, char* rua){
 printf("[ID] [RUA]                [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]\n");
     if(l!=NULL)
     {
-        no* a = l->inicio;
+        nolote* a = l->inicio;
         char* aux = (char*) malloc(sizeof(char)*21);
 
         while(a != NULL)
@@ -352,7 +355,7 @@ void mostraid(listalotes* l, int id){
     printf("[ID] [RUA]                [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]\n");
     if(l!=NULL)
     {
-        no* a = l->inicio;
+        nolote* a = l->inicio;
         char* aux = (char*) malloc(sizeof(char)*21);
 
         while(a != NULL)
@@ -388,7 +391,7 @@ void mostracorretor(listalotes* l, char* creci){
     printf("[ID] [RUA]                [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]\n");
     if(l!=NULL)
     {
-        no* a = l->inicio;
+        nolote* a = l->inicio;
         char* aux = (char*) malloc(sizeof(char)*21);
 
         while(a != NULL)
@@ -423,12 +426,12 @@ void mostracliente(listalotes* l, cliente b){
     printf("[ID] [RUA]                [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]\n");
     if(l!=NULL)
     {
-        no* a = l->inicio;
+        nolote* a = l->inicio;
         char* aux = (char*) malloc(sizeof(char)*21);
 
         while(a != NULL)
         {
-            if(a->valor.cliente == b.nome)
+            if(a->valor.cliente == b.noloteme)
             {
                 int verificador = 0;
                 for(int i=0; i<20; i++)  // FORMATA A RUA EM UM NUMERO MAXIMO DE CARACTERES
@@ -454,12 +457,12 @@ void mostracliente(listalotes* l, cliente b){
 int lotevendido(listalotes* l, int id, cliente a, int creci, float preco){
     if(l == NULL) return 0;
     if(listavazia(l)) return 0;
-    no* cl = l->inicio;
+    nolote* cl = l->inicio;
     while(cl!=NULL)
     {
         if((cl->valor).id == id) {
             cl->valor.status = 3;
-            cl->valor.cliente = a.nome;
+            cl->valor.cliente = a.noloteme;
             cl->valor.creci = creci;
             cl->valor.preco = preco;
             return 1;

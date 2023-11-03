@@ -8,7 +8,7 @@
 
 int cadastrarlote(listalotes* l);
 
-void IniciaLogin(listalotes* a, ListaCliente* b, ListaCorretor* c, corretor corretorr);
+void IniciaLogin(listalotes* a, listacliente* b, ListaCorretor* c, corretor corretorr);
 
 void MostraLote(listalotes* l);
 
@@ -18,11 +18,15 @@ void mostrarCliente(listacliente *b);
 
 int gerenciarClientes(listacliente *b);
 
-int Simulador(listalotes* a, ListaCliente* b, corretor corretorr);
+int Simulador(listalotes* a, listacliente* b, corretor corretorr);
 
-int FaturamentoCorretor(corretor corretorr, listalotes* a)
+int FaturamentoCorretor(corretor corretorr, listalotes* a);
 
 float FaturamentoTotal(listalotes* a);
+
+void Cadastro(lista* l, char* email, char* senha);
+
+
 
 int main()
 {
@@ -44,12 +48,12 @@ int main()
             scanf("%s", email);
             printf("Ótimo! Agora, sua senha:\n");
             scanf("%s", senha);
-            if(/*VerificaUsuario(l, usuario, senha)*/)
+            if(VerificaUsuario(c, email, senha))
             {
-                corretor* a;
-                //LoginUsuario(corretor* a, ListaUsuario* b, char* email);
+                corretor corretorr;
+                LoginUsuario(&corretorr, c, email);
                 
-                //IniciaLogin(listalotes* l, ListaCliente* cliente, ListaCorretor* corretor, a);
+                IniciaLogin(a, b, c, corretorr);
             }
         }
         else if(opcao == 2)
@@ -59,7 +63,7 @@ int main()
             scanf("%s", email);
             printf("Ótimo! Agora, a senha que deseja utilizar:\n");
             scanf("%s", senha);
-            //  InserirUsuario(l, usuario, senha);
+            Cadastro(c, email, senha);
         }
         else if(opcao == 3)
         {
@@ -72,7 +76,7 @@ int main()
 }
 
 
-void IniciaLogin(listalotes* l, ListaCliente* cliente, ListaCorretor* corretorr, corretor a)
+void IniciaLogin(listalotes* a, listacliente* b, lista* c, corretor corretorr)
 {
 
     int opc = -1;
@@ -80,21 +84,21 @@ void IniciaLogin(listalotes* l, ListaCliente* cliente, ListaCorretor* corretorr,
     {
         system("cls");
         printf("Seja bem vindo %s!\n", a.nome);
-        printf("O que voce deseja hoje?\n\n1- Cadastrar lote\n2- Gerenciar Clientes\n3- Ver lotes\n4- Simular Venda\n5- Vender Lote\n6- Ver meu faturamento\n7- Ver faturamento do empreendimento\n10- Sair")
+        printf("O que voce deseja hoje?\n\n1- Cadastrar lote\n2- Gerenciar Clientes\n3- Ver lotes\n4- Simular Venda\n5- Vender Lote\n6- Ver meu faturamento\n7- Ver faturamento do empreendimento\n10- Sair");
 
-            if(opc == 1)      //cadastrarlote(a); (FEITO)
+            if(opc == 1)      cadastrarlote(a); // (FEITO)
 
-            else if(opc == 2) //gerenciarClientes(b); (FEITO)
+            else if(opc == 2) gerenciarClientes(b); // (FEITO)
 
-            else if(opc == 3) // MostraLote(a); (FEITO)
+            else if(opc == 3) MostraLote(a); //  (FEITO)
 
-            else if(opc == 4) // Simulador(l, b, corretorr);
+            else if(opc == 4) Simulador(a, b, corretorr);
                 
-            else if(opc == 5) // Venda(l, b, corretorr);
+            else if(opc == 5) Venda(a, b, corretorr);
             
-            else if(opc == 6) // FaturamentoCorretor(corretorr, a);
+            else if(opc == 6) FaturamentoCorretor(corretorr, a); // FEITO
             
-            else if(opc == 7) // FaturamentoTotal(a);
+            else if(opc == 7) FaturamentoTotal(a); // FEITO
 
             else printf("Opcao Invalida!\n");
 
@@ -199,7 +203,7 @@ int cadastrarCliente(listacliente *b){
 
 }
 
-void mostrarCliente(b){
+void mostrarCliente(listacliente* b){
 
     system("cls");
 
@@ -297,7 +301,7 @@ int gerenciarClientes(listacliente *b){
 }
 
 ////
-int Simulador(listalotes* a, ListaCliente* b, corretor corretorr)
+int Simulador(listalotes* a, listacliente* b, corretor corretorr)
 {
     int op;
     //valorDoMetro -> informado pelo corretor 
@@ -453,7 +457,7 @@ int FaturamentoCorretor(corretor corretorr, listalotes* a){
     system("cls");
     if (a == NULL) return -1;
     float v = 0;
-    lote* cl = a->inicio;
+    nolote* cl = a->inicio;
     while(cl!=NULL){
         
         if(corretorr.CRECI == (cl->valor).creci) v+= cl->valor.preco;
@@ -471,7 +475,7 @@ float FaturamentoTotal(listalotes* a){
     
     if (a == NULL) return -1;
     float v = 0;
-    lote* cl = a->inicio;
+    nolote* cl = a->inicio;
     while(cl!=NULL){
         
         v+= cl->valor.preco;
@@ -483,5 +487,28 @@ float FaturamentoTotal(listalotes* a){
 
 
     return 1;
+
+}
+
+void Cadastro(lista* l, char* email, char* senha){
+    system("cls");
+    printf("Perfeito! Agora, vamos coletar alguns dados pessoais...\n\n");
+    char aux[100];
+    corretor a;
+
+    printf("Qual seu nome completo?\n");
+    fgets(aux, 49, stdin);
+    strcpy(a.nome, aux);
+    printf("Me informe agora seu endereco\n");
+    fgets(aux, 50, stdin);
+    strcpy(a.endereco, aux);
+    printf("Me informe agora seu cpf (SOMENTE NUMEROS):\n");
+    fgets(aux, 15, stdin);
+    strcpy(a.cpf, aux);
+    printf("Por ultimo, favor informe seu CRECI:\n");
+    fgets(aux, 19, stdin);
+    strcpy(a.creci, aux);
+    printf("Otimo! Realizando Cadastro...\n\n\n");
+    novoCadastro(l, a);
 
 }

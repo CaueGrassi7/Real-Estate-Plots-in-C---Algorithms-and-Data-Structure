@@ -16,13 +16,13 @@ float preco;
 
 typedef struct Lote lote;
 
-typedef struct No{
+typedef struct nolote{
 lote valor;
-no* prox;
-}no;
+nolote* prox;
+}nolote;
 
 typedef struct listaLotes{
-no* inicio;
+nolote* inicio;
 int cod;
 
 }listalotes;
