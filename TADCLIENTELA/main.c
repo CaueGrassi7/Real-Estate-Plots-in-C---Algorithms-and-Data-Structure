@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "gerenciador.h"
+#include "asd.h"
 
 int cadastrarlote(listalotes* l);
 
-void IniciaLogin(listalotes* a, listacliente* b, ListaCorretor* c, corretor corretorr);
+void IniciaLogin(listalotes* a, listacliente* b, lista* c, corretor corretorr);
 
 void MostraLote(listalotes* l);
 
@@ -44,7 +44,7 @@ int main()
             system("cls");
             printf("Seja bem vindo novamente!\n\nInsira seu email:\n");
             scanf("%s", email);
-            printf("Ótimo! Agora, sua senha:\n");
+            printf("Otimo! Agora, sua senha:\n");
             scanf("%s", senha);
             if(VerificaUsuario(c, email, senha))
             {
@@ -52,6 +52,7 @@ int main()
                 LoginUsuario(&corretorr, c, email);
 
                 IniciaLogin(a, b, c, corretorr);
+
             }
         }
         else if(opcao == 2)
@@ -59,7 +60,7 @@ int main()
             system("cls");
             printf("Seja bem vindo!\n\nInsira seu email:\n");
             scanf("%s", email);
-            printf("Ótimo! Agora, a senha que deseja utilizar:\n");
+            printf("ï¿½timo! Agora, a senha que deseja utilizar:\n");
             scanf("%s", senha);
             Cadastro(c, email, senha);
         }
@@ -231,7 +232,7 @@ int gerenciarClientes(listacliente *b){
     if(op == 1){
 
         cadastrarCliente(b);
-        return gerenciarClientes(b); //função da main
+        return gerenciarClientes(b); //funï¿½ï¿½o da main
 
     }
 
@@ -256,7 +257,7 @@ int gerenciarClientes(listacliente *b){
     }
     if(op == 3){
 
-        mostrarCliente(b); //função da main
+        mostrarCliente(b); //funï¿½ï¿½o da main
         return gerenciarClientes(b);
 
     }
@@ -340,7 +341,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
                 scanf("%d", &idLote);
 
 
-                //Orçamento do lote
+                //Orï¿½amento do lote
                 printf("Valor do metro quadrado do lote: ");
                 setbuf(stdin, NULL);
                 scanf("%f", &valorDoMetro);
@@ -414,7 +415,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
                     }
                 }while  (formaDePagamento != 0);
 
-                //Confirmação da venda
+                //Confirmaï¿½ï¿½o da venda
                 printf("\nConfirmar venda?\n");
                 printf("1 - Sim\n");
                 printf("2 - Nao\n");

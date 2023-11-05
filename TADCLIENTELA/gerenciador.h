@@ -1,33 +1,31 @@
 #ifndef GERENCIADOR_H_INCLUDED
 #define GERENCIADOR_H_INCLUDED
 
-//TAD LOTES
 
-struct Lote{
-
-int id;
-int tamanho;
-char rua[50];
-int quadra;
-int num;
-int status;
-char* cliente;
-char* creci;
-float preco;
-};
 
 typedef struct Lote lote;
 
-typedef struct nolote{
-    lote valor;
-    struct nolote* prox;
-}nolote;
+typedef struct nolote nolote;
 
-typedef struct listaLotes{
-nolote* inicio;
-int cod;
+typedef struct listaLotes listalotes;
 
-}listalotes;
+typedef struct Corretor corretor;
+
+typedef struct NO no;
+
+typedef struct Lista lista;
+
+typedef struct cliente cliente;
+
+typedef struct cliente Cliente;
+
+typedef struct listacliente listacliente;
+
+
+
+
+
+//TAD LOTES
 
 listalotes* crialistalote();
 
@@ -44,18 +42,16 @@ void mostrarua(listalotes* l, char* rua);
 void mostraid(listalotes* l, int id);
 void mostracorretor(listalotes* l, char* creci);
 void mostracliente(listalotes* l, Cliente a);
-int lotevendido(listalotes* l, int id, Cliente a, int creci, float preco);
+int lotevendido(listalotes* l, int id, Cliente a, char* creci, float preco);
 
 //TAD USUARIO //////////////////////////////////////////////////////////////////////////
 
-typedef struct Corretor corretor;
 
-typedef struct NO no;
-
-typedef struct Lista lista;
 
 lista* criarlistacorretor();
 void login();
+int existeCadastro (lista *l, char* email);
+void visualizarUsuarios (lista *l);
 void visualizarClientes();
 int listaVazia(lista* l);
 int tamanhoUsuario(lista* l);
@@ -66,18 +62,7 @@ int LoginUsuario(corretor* a, lista* l, char* email);
 
 //TAD CLIENTE //////////////////////////////////////////////////////////////////////////
 
-typedef struct cliente{
 
-    char nome[50];
-    char cpf[15];
-    char endereco[50];
-    char email[40];
-
-}Cliente;
-
-typedef Cliente cliente;
-
-typedef struct listacliente listacliente;
 
 listacliente *criar();
 
@@ -112,5 +97,7 @@ int tamanho(listacliente *l);
 void mostrar(listacliente *l);
 
 void mostrarlistaclienteClienteNome(listacliente *l, char *nome);
+
+
 
 #endif // GERENCIADOR_H_INCLUDED

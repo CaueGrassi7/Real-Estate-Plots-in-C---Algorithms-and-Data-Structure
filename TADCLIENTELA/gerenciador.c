@@ -1,35 +1,14 @@
-#include "gerenciador.h"
+#include "asd.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 
-struct Lote{
 
-int id;
-int tamanho;
-char rua[50];
-int quadra;
-int num;
-int status;
-char* cliente;
-char* creci;
-float preco;
-};
 
-typedef struct Lote lote;
 
-typedef struct nolote{
-    lote valor;
-    struct nolote* prox;
-}nolote;
 
-typedef struct listaLotes{
-nolote* inicio;
-int cod;
-
-}listalotes;
-
+//// TADS
 typedef struct cliente{
 
     char nome[50];
@@ -38,6 +17,80 @@ typedef struct cliente{
     char email[40];
 
 }Cliente;
+
+typedef struct no{
+
+    Cliente pessoa;
+    struct no *prox;
+
+}No;
+typedef struct listacliente{
+
+    No *inicio;
+
+}listacliente;
+
+
+struct Lote
+{
+
+    int id; // CODIGO DE IDENTIFICAï¿½ï¿½O DO LOTE. Nï¿½O REPRESENTA NADA ALEM DE IDENTIFICAï¿½ï¿½O.
+    int tamanho; // DADOS               // (Cï¿½DIGO ï¿½NICO DE CADA LOTE, MESMO QUE EXCLUIDO)
+    char rua[50]; // DO
+    int quadra;   // LOTE
+    int num;
+    int status; // SITUAï¿½ï¿½O ATUAL DO LOTE (1 - LIVRE, 2 - RESERVADO, 3 -  VENDIDO);
+    char* cliente;
+    char* creci; // CORRETOR RESPONSAVEL
+    float preco;
+};
+typedef struct Lote lote;
+
+
+// Nï¿½ DA LISTA
+typedef struct nolote
+{
+    lote valor;
+    nolote* prox;
+} nolote;
+
+
+// TIPO LISTA DE LOTES
+typedef struct listaLotes
+{
+    nolote* inicio;
+    int cod; // VARIAVEL PARA CONTROLE DE LOTES E PARA ATRIBUIR OS Cï¿½DIGOS DE CADA LOTE.
+}listalotes;
+
+struct Corretor
+{
+    char nome[50];
+    char cpf[15];
+    char email[50];
+    char endereco[50];
+    char senha[30];
+    char creci[20];
+};
+
+typedef struct Corretor corretor;
+
+struct NO {
+    struct Corretor valor;
+    struct NO *prox;
+};
+
+typedef struct NO no;
+
+struct Lista {
+    struct NO *inicio;
+};
+
+
+
+
+
+
+
 
 typedef Cliente cliente;
 
@@ -52,42 +105,13 @@ typedef struct NO no;
 typedef struct Lista lista;
 
 
+
+
 //LOTE////////////////////////////////////////////////////////////////////
 
-// TIPO LOTE
-struct Lote
-{
-
-    int id; // CODIGO DE IDENTIFICAÇÃO DO LOTE. NÃO REPRESENTA NADA ALEM DE IDENTIFICAÇÃO.
-    int tamanho; // DADOS               // (CÓDIGO ÚNICO DE CADA LOTE, MESMO QUE EXCLUIDO)
-    char rua[50]; // DO
-    int quadra;   // LOTE
-    int num;
-    int status; // SITUAÇÃO ATUAL DO LOTE (1 - LIVRE, 2 - RESERVADO, 3 -  VENDIDO);
-    char* cliente;
-    char* creci; // CORRETOR RESPONSAVEL
-    float preco;
-};
-typedef struct Lote lote;
 
 
-// NÓ DA LISTA
-typedef struct nolote
-{
-    lote valor;
-    nolote* prox;
-} nolote;
-
-
-// TIPO LISTA DE LOTES
-typedef struct listaLotes
-{
-    nolote* inicio;
-    int cod; // VARIAVEL PARA CONTROLE DE LOTES E PARA ATRIBUIR OS CÓDIGOS DE CADA LOTE.
-}listalotes;
-
-
-// CRIAÇÃO DA LISTA DE LOTES
+// CRIAï¿½ï¿½O DA LISTA DE LOTES
 listalotes *crialistalote()
 {
     listalotes* l = (listalotes*) malloc (sizeof(listalotes)); // ALOCA A LISTA E CRIA A LISTA;
@@ -98,7 +122,7 @@ listalotes *crialistalote()
 
 
 
-// INSERÇÃO DO LOTE EM ORDEM (RUA).
+// INSERï¿½ï¿½O DO LOTE EM ORDEM (RUA).
 int inserelote(listalotes* l, lote a){
     if(l == NULL) return 0;
     nolote* nolotevoLote = (nolote*)malloc(sizeof(nolote));
@@ -109,7 +133,7 @@ int inserelote(listalotes* l, lote a){
     nolotevoLote->valor.preco = 0;
 
     if (l->inicio == NULL || strcmp(a.rua, l->inicio->valor.rua) < 0) {
-        // Inserir nolote início da lista
+        // Inserir nolote inï¿½cio da lista
         nolotevoLote->prox = l->inicio;
         l->inicio = nolotevoLote;
     }
@@ -118,7 +142,7 @@ int inserelote(listalotes* l, lote a){
         while (atual->prox != NULL && strcmp(a.rua, atual->prox->valor.rua) >= 0) {
             atual = atual->prox;
         }
-        // Inserir após o nó 'atual'
+        // Inserir apï¿½s o nï¿½ 'atual'
         nolotevoLote->prox = atual->prox;
         atual->prox = nolotevoLote;
     }
@@ -132,9 +156,9 @@ int inserelote(listalotes* l, lote a){
 
 
 
-// FUNÇÃO QUE BUSCA UM LOTE UTILIZANDO SEU ID
+// FUNï¿½ï¿½O QUE BUSCA UM LOTE UTILIZANDO SEU ID
 // RETORNA 1 SE ENCONTRA
-// RETORNA 0 SE NÃO
+// RETORNA 0 SE Nï¿½O
 int buscalote(listalotes* l, lote a)
 {
     if(l == NULL) return 0;
@@ -150,8 +174,8 @@ int buscalote(listalotes* l, lote a)
 
 
 
-// FUNÇÃO QUE RETORNA O STATUS DO LOTE
-// (0 - LOTE NÃO ENCONTRADO 1 - LIVRE, 2 - RESERVADO, 3 -  VENDIDO);
+// FUNï¿½ï¿½O QUE RETORNA O STATUS DO LOTE
+// (0 - LOTE Nï¿½O ENCONTRADO 1 - LIVRE, 2 - RESERVADO, 3 -  VENDIDO);
 int statuslote(listalotes* l, int id)
 {
     if(l == NULL) return 0;
@@ -167,9 +191,9 @@ int statuslote(listalotes* l, int id)
 
 
 
-// FUNÇÃO QUE ALTERA O STATUS DE UM DADO LOTE.
-// RETORNA 0 SE NÃO ENCONTRADO
-// RETORNA 1 SE FUNÇÃO FEITA COM SUCESSO
+// FUNï¿½ï¿½O QUE ALTERA O STATUS DE UM DADO LOTE.
+// RETORNA 0 SE Nï¿½O ENCONTRADO
+// RETORNA 1 SE FUNï¿½ï¿½O FEITA COM SUCESSO
 int mudastatus(listalotes* l, int id, int status)
 {
     if(l == NULL) return 0;
@@ -188,9 +212,9 @@ int mudastatus(listalotes* l, int id, int status)
 }
 
 
-// FUNÇÃO QUE REMOVE UM CERTO LOTE POR SUA IDENTIFICAÇÃO
-// RETORNA 1 SE OPERAÇÃO REALIZADA
-// RETORNA 0 SE NÃO ENCONTRADO
+// FUNï¿½ï¿½O QUE REMOVE UM CERTO LOTE POR SUA IDENTIFICAï¿½ï¿½O
+// RETORNA 1 SE OPERAï¿½ï¿½O REALIZADA
+// RETORNA 0 SE Nï¿½O ENCONTRADO
 int removelote(listalotes* l, int id)
 {
     if(l == NULL) return 0;
@@ -214,7 +238,7 @@ int removelote(listalotes* l, int id)
     return 0;
 }
 
-// MOSTRA OS LOTES NA ORDEM EM QUE ESTÃO NA LISTA (ORDEM ALFABÉTICA PELA RUA)
+// MOSTRA OS LOTES NA ORDEM EM QUE ESTï¿½O NA LISTA (ORDEM ALFABï¿½TICA PELA RUA)
 // MODELO A SER MOSTRADO:
 // [ID] [RUA] [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]
 void mostrarlotes(listalotes* l)
@@ -247,7 +271,7 @@ void mostrarlotes(listalotes* l)
 }
 
 
-// MOSTRA OS LOTES NA ORDEM EM QUE ESTÃO NA LISTA, SE DISPONIVEIS (ORDEM ALFABÉTICA PELA RUA)
+// MOSTRA OS LOTES NA ORDEM EM QUE ESTï¿½O NA LISTA, SE DISPONIVEIS (ORDEM ALFABï¿½TICA PELA RUA)
 // MODELO A SER MOSTRADO:
 // [ID] [RUA] [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]
 void mostrardisponivel(listalotes* l)
@@ -283,7 +307,7 @@ void mostrardisponivel(listalotes* l)
 
 }
 
-// MOSTRA OS LOTES NA ORDEM EM QUE ESTÃO NA LISTA, SE RESERVADOS (ORDEM ALFABÉTICA PELA RUA)
+// MOSTRA OS LOTES NA ORDEM EM QUE ESTï¿½O NA LISTA, SE RESERVADOS (ORDEM ALFABï¿½TICA PELA RUA)
 // MODELO A SER MOSTRADO:
 // [ID] [RUA] [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]
 void mostrarreservados(listalotes* l)
@@ -320,7 +344,7 @@ void mostrarreservados(listalotes* l)
 
 }
 
-// MOSTRA OS LOTES NA ORDEM EM QUE ESTÃO NA LISTA, SE VENDIDOS (ORDEM ALFABÉTICA PELA RUA)
+// MOSTRA OS LOTES NA ORDEM EM QUE ESTï¿½O NA LISTA, SE VENDIDOS (ORDEM ALFABï¿½TICA PELA RUA)
 // MODELO A SER MOSTRADO:
 // [ID] [RUA] [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]
 void mostrarvendidos(listalotes* l)
@@ -357,7 +381,7 @@ void mostrarvendidos(listalotes* l)
 }
 
 
-// MOSTRA OS LOTES NA ORDEM EM QUE ESTÃO NA LISTA, PELA RUA
+// MOSTRA OS LOTES NA ORDEM EM QUE ESTï¿½O NA LISTA, PELA RUA
 // MODELO A SER MOSTRADO:
 // [ID] [RUA] [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]
 void mostrarua(listalotes* l, char* rua){
@@ -394,7 +418,7 @@ printf("[ID] [RUA]                [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]\n
 
 }
 
-// MOSTRA OS LOTES NA ORDEM EM QUE ESTÃO NA LISTA, PELO ID
+// MOSTRA OS LOTES NA ORDEM EM QUE ESTï¿½O NA LISTA, PELO ID
 // MODELO A SER MOSTRADO:
 // [ID] [RUA] [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]
 void mostraid(listalotes* l, int id){
@@ -430,7 +454,7 @@ void mostraid(listalotes* l, int id){
 }
 
 
-// MOSTRA OS LOTES NA ORDEM EM QUE ESTÃO NA LISTA, DE ACORDO COM CORRETOR
+// MOSTRA OS LOTES NA ORDEM EM QUE ESTï¿½O NA LISTA, DE ACORDO COM CORRETOR
 // MODELO A SER MOSTRADO:
 // [ID] [RUA] [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]
 void mostracorretor(listalotes* l, char* creci){
@@ -465,7 +489,7 @@ void mostracorretor(listalotes* l, char* creci){
     }
 }
 
-// MOSTRA OS LOTES NA ORDEM EM QUE ESTÃO NA LISTA, DE ACORDO COM CLIENTE
+// MOSTRA OS LOTES NA ORDEM EM QUE ESTï¿½O NA LISTA, DE ACORDO COM CLIENTE
 // MODELO A SER MOSTRADO:
 // [ID] [RUA] [QUADRA] [NUMERO] [STATUS] [CLIENTE] [CRECI]
 void mostracliente(listalotes* l, cliente b){
@@ -499,7 +523,7 @@ void mostracliente(listalotes* l, cliente b){
     }
 }
 
-// FUNÇÃO QUE ALTERA UM LOTE COMO VENDIDO
+// FUNï¿½ï¿½O QUE ALTERA UM LOTE COMO VENDIDO
 int lotevendido(listalotes* l, int id, cliente a, char* creci, float preco){
     if(l == NULL) return 0;
     if(listavazia(l)) return 0;
@@ -520,35 +544,13 @@ int lotevendido(listalotes* l, int id, cliente a, char* creci, float preco){
 
 //USUARIO////////////////////////////////////////////////////////////////////
 
-struct Corretor
-{
-    char nome[50];
-    char cpf[15];
-    char email[50];
-    char endereco[50];
-    char senha[30];
-    char creci[20];
-};
-
-typedef struct Corretor corretor;
-
-struct NO {
-    struct Corretor valor;
-    struct NO *prox;
-};
-
-typedef struct NO no;
-
-struct Lista {
-    struct NO *inicio;
-};
 
 int listaVazia (lista *l) {
     if (l == NULL) return -1;
     if (l->inicio == NULL) return 1;
 }
 
-lista * criar () {
+lista * criarlistacorretor() {
     lista *l = (lista*) malloc(sizeof(lista));
     if (l != NULL) {
         l->inicio = NULL;
@@ -575,7 +577,7 @@ int novoCadastro (lista *l, corretor c) {
     while (noLista-> prox != NULL) {
         noLista = noLista->prox;
     }
-    no * no = (no*) malloc(sizeof(no));
+    no* no = (struct NO*) malloc(sizeof(no));
     no->valor = c;
     no->prox = NULL;
     noLista->prox = no;
@@ -641,155 +643,426 @@ int LoginUsuario(corretor* a, lista* l, char* email){
 return 0;
 
 }
+
 
 //CLIENTE////////////////////////////////////////////////////////////////////
 
-struct Corretor
-{
-    char nome[50];
-    char cpf[15];
-    char email[50];
-    char endereco[50];
-    char senha[30];
-    char creci[20];
-};
 
-typedef struct Corretor corretor;
+listacliente *criar(){
 
-struct NO {
-    struct Corretor valor;
-    struct NO *prox;
-};
+    listacliente *l = (listacliente*) malloc(sizeof(listacliente));
 
-typedef struct NO no;
+    if(l != NULL){
 
-struct Lista {
-    struct NO *inicio;
-};
-
-int listaVazia (lista *l) {
-    if (l == NULL) return -1;
-    if (l->inicio == NULL) return 1;
-}
-
-lista * criar () {
-    lista *l = (lista*) malloc(sizeof(lista));
-    if (l != NULL) {
         l->inicio = NULL;
+
     }
+
     return l;
 }
 
-int tamanho (lista *l) {
-    if (l == NULL) {
-        return -1;
-    }
-    int cont = 0;
-    struct NO *aux = l->inicio;
-    while (aux != NULL) {
-        cont++;
-        aux = aux->prox;
-    }
-    return cont;
+
+
+int listaclienteVazia(listacliente *l){
+
+    if(l == NULL) return 2;
+    if(l->inicio == NULL) return 0;
+    else return 1;
+
 }
 
-int novoCadastro (lista *l, corretor c) {
-    if (l == NULL) return -1;
-    no *noLista = l->inicio;
-    while (noLista-> prox != NULL) {
-        noLista = noLista->prox;
+
+
+int listaclienteCheia(listacliente *l){
+
+    return 1;
+
+}
+
+
+
+void limpar(listacliente *l){
+
+    while(listaclienteVazia(l) != 0){
+
+        removerClienteInicio(l);
+
     }
-    no * no = (no*) malloc(sizeof(no));
-    no->valor = c;
+
+}
+
+
+
+int adicionarClienteInicio(listacliente *l, Cliente c){
+
+    if(l == NULL) return 2;
+    if(listaclienteCheia(l) == 0) return -1;
+
+    No *no = (No*) malloc(sizeof(No));
+
+        no->pessoa = c;
+        no->prox = l->inicio;
+        l->inicio = no;
+
+    return 0;
+}
+
+
+
+int adicionarClienteFinal(listacliente *l, Cliente c){
+
+    if(l == NULL) return 2;
+    if(listaclienteCheia(l) == 0) return -1;
+
+    No *no = (No*) malloc(sizeof(No));
+    no->pessoa = c;
     no->prox = NULL;
-    noLista->prox = no;
+
+    if(listaclienteVazia(l) == 0){
+
+        l->inicio = no;
+        return 0;
+
+    }
+
+    No *nolistacliente = l->inicio;
+
+    while(nolistacliente->prox != NULL){
+
+        nolistacliente = nolistacliente->prox;
+
+    }
+
+    nolistacliente->prox = no;
+
+    return 0;
+}
+
+
+
+int adicionarClientePosicao(listacliente *l, Cliente c, int pos){
+
+    if(l == NULL) return 2;
+    if(listaclienteCheia(l) == 0) return 1;
+    if(pos < 0) return -2;
+
+    if((listaclienteVazia(l) == 0) || (pos == 0)) return adicionarClienteInicio(l, c);
+
+    No *nolistacliente = l->inicio;
+    int p = 1;
+
+    while((nolistacliente != NULL) && (p < pos)){
+
+        nolistacliente = nolistacliente->prox;
+        p++;
+
+    }
+
+    /*
+    if(pos != p)
+        return -3; //posicao nao encontrada
+    */
+
+    No *no = (No*) malloc(sizeof(No));
+    no->pessoa = c;
+
+    no->prox = nolistacliente->prox;
+    nolistacliente->prox = no;
+
+    return 0;
+}
+
+
+
+int ordemAlfabetica(listacliente *l){
+
+    if(l == NULL) return 2;
+    if(listaclienteVazia(l) == 0) return 1; //Nï¿½o hï¿½ o que ordenar
+    if(tamanho(l) == 1) return 3; //A listacliente tem apenas um elemento
+
+    No *noAux; //Nï¿½ para o primeiro elemento
+    No *nolistacliente; //Nï¿½ para o segundo elemento
+    Cliente temp; //espaï¿½o temporario para o deslocamento de um cliente
+
+    for(noAux = l->inicio; noAux != NULL; noAux = noAux->prox){ //o primeiro for controla o primeiro nï¿½ atï¿½ que chegue ao final da listacliente
+
+        for(nolistacliente = noAux->prox; nolistacliente != NULL; nolistacliente = nolistacliente->prox){ //o segundo, que fica sempre a frente do primeiro, tambï¿½m anda atï¿½ o final da listacliente
+
+            if(strcmp(noAux->pessoa.nome, nolistacliente->pessoa.nome) > 0){ //se o nï¿½ da frente for alfabeticamente menor que o de trï¿½s:
+
+                temp = noAux->pessoa; //guarda o de trï¿½s em no espaï¿½o temporario
+                noAux->pessoa = nolistacliente->pessoa; //passa o da frente pra trï¿½s
+                nolistacliente->pessoa = temp; //coloca o temporario na frente
+
+            }
+        }
+    }
+
+    return 0;
+
+}
+
+
+
+int removerClienteCPF(listacliente *l, char *cpf){
+
+    if(l == NULL) return 2;
+    if(listaclienteVazia(l) == 0) return 1;
+
+    No *noAux = NULL;
+    No *nolistacliente = l->inicio;
+
+    while(nolistacliente != NULL){
+
+        if(strcmp(nolistacliente->pessoa.cpf, cpf) == 0){
+
+            if(noAux == NULL){
+
+               if(nolistacliente->prox == NULL){
+
+                    free(nolistacliente);
+                    l->inicio = NULL;
+                    return 0;
+
+               }
+
+                l->inicio = nolistacliente->prox;
+                free(nolistacliente);
+                return 0;
+
+            }
+
+            noAux->prox = nolistacliente->prox;
+            free(nolistacliente);
+            return 0;
+
+        }
+
+        noAux = nolistacliente;
+        nolistacliente = nolistacliente->prox;
+
+    }
+
     return 1;
 }
 
-int existeCadastro (lista *l, char* email) {
-    if (l == NULL) return -1;
-    no *noLista = l->inicio;
-    while (noLista != NULL) {
 
-        if (strcmp(noLista->valor.email, email) == 0) {
-            return 1;
-        }
-        noLista = noLista->prox;
+int removerClientePosicao(listacliente *l, int pos){
+
+    if(l == NULL) return 2;
+    if(listaclienteVazia(l) == 0) return 1;
+    if(pos < 0) return -2;
+
+    if(pos == 0) return removerClienteInicio(l);
+
+    No *noAux = NULL;
+    No *nolistacliente = l->inicio;
+    int p = 0;
+
+    while((nolistacliente != NULL) && (pos < p)){
+
+        noAux = nolistacliente;
+        nolistacliente = nolistacliente->prox;
+        p++;
 
     }
-    return 0;
-}
 
-/*
-void login (lista *l, char cpf[15]) {
-    if (l == NULL) return 1;
-    if (existeCadastro(l, cpf) == 0) {
-        printf("Bem vindo, %s", cpf);
-    } else {
-        printf("Cadastro não encontrado");
-    }
+    /*
+    if(pos < p)
+        return -3; //posicao nao encontrada
+    */
 
-}
-*/
+    if(noAux == NULL){
 
-void visualizarUsuarios (lista *l) {
-    if (l != NULL) {
-        printf ("[");
-        no *noLista = l->inicio;
-        while (noLista != NULL) {
-            printf("[%s ", noLista->valor.nome);
-            printf("%s ", noLista->valor.cpf);
-            printf("%s]\n", noLista->valor.email);
-            noLista = noLista->prox;
-        }
-        printf("]\n");
-    }
-}
-
-/*
-int excluirUsuario (lista *l, char cpf[15]) {
-    if (l == NULL) return 1;
-    if (listaVazia(l) == 0) return 2;
-    no *noLista = l->inicio;
-    while (noLista->valor.cpf != cpf) {
-        if (noLista == NULL) return 3;
-        noLista = noLista->prox;
-    }
-        noLista->ant->prox = noLista->prox;
-        noLista->prox->ant = noLista->ant;
-        free(noLista);
+        l->inicio = nolistacliente->prox;
+        free(nolistacliente);
         return 0;
 
-}
-*/
+    }
 
-int VerificaUsuario(lista* l, char* usuario, char* senha){
-    if(l == NULL) return -1;
-    if(listaVazia(l)) return 0;
-    if(existeCadastro(l, usuario)){
-    no* aux = l->inicio;
-    while(aux != NULL){
-    if(strcmp(aux->valor.email, usuario)==0) return 1;
-    aux = aux->prox;
+    noAux->prox = nolistacliente->prox;
+    free(nolistacliente);
+
+    return 0;
+
+}
+
+
+
+int existeClienteCPF(listacliente *l, char *cpf){
+
+    if(l == NULL) return 2;
+    if(listaclienteVazia(l) == 0) return 1;
+
+    No *nolistacliente = l->inicio;
+
+    while(nolistacliente != NULL){
+
+        if(strcmp(nolistacliente->pessoa.cpf, cpf) == 0){
+
+            return 0;
+
+        }
+
+        nolistacliente = nolistacliente->prox;
+
     }
+
+    return 1;
+
+}
+
+
+
+int removerClienteInicio(listacliente *l){
+
+    if(l == NULL) return 2;
+    if(listaclienteVazia(l) == 0) return 1;
+
+    No *nolistacliente = l->inicio;
+
+    if(nolistacliente->prox == NULL){
+
+        free(nolistacliente);
+        l->inicio = NULL;
+        return 0;
+
     }
+
+    l->inicio = nolistacliente->prox;
+    free(nolistacliente);
+
     return 0;
 }
 
 
-int LoginUsuario(corretor* a, lista* l, char* email){
-    if(l == NULL) return -1;
-    no* aux;
-    aux = l->inicio;
-    while(aux!= NULL){
-        if(strcmp(aux->valor.email, email)==0){
-            *a = aux->valor;
-            return 1;
-        }
-        aux = aux->prox;
+
+int removerClienteFinal(listacliente *l){
+
+    if(l == NULL) return 2;
+    if(listaclienteVazia(l) == 0) return 1;
+
+    No *noAux = NULL;
+    No *nolistacliente = l->inicio;
+
+    while(nolistacliente->prox != NULL){
+
+        noAux = nolistacliente;
+        nolistacliente = nolistacliente->prox;
 
     }
 
-return 0;
+    if(noAux == NULL) l->inicio = NULL;
+    else noAux->prox = NULL;
 
+    free(nolistacliente);
+
+    return 0;
 }
+
+
+
+int retornaClienteCPF(listacliente *l, Cliente *retorno, char *cpf){
+
+    if(l == NULL) return 2;
+    if(listaclienteVazia(l) == 0) return 1;
+
+    No *nolistacliente = l->inicio;
+
+    while(nolistacliente != NULL){
+
+        if(strcmp(nolistacliente->pessoa.cpf, cpf) == 0){
+
+            *retorno = nolistacliente->pessoa;
+            return 0;
+
+        }
+
+        nolistacliente = nolistacliente->prox;
+
+    }
+
+    return 1;
+}
+
+
+
+int tamanho(listacliente *l){
+
+    if(l == NULL) return 2;
+    if(listaclienteVazia(l) == 0) return 0;
+
+    No *nolistacliente = l->inicio;
+    int contador = 0;
+
+    while(nolistacliente != NULL){
+
+        contador++;
+        nolistacliente = nolistacliente->prox;
+
+    }
+
+    return contador;
+}
+
+
+
+void mostrar(listacliente *l){
+
+    if(l != NULL){
+
+        printf("Lista de Clientes:\n\n");
+
+        if(listaclienteVazia(l) != 0){
+
+            No *nolistacliente = l->inicio;
+            int i = 1;
+
+            while(nolistacliente != NULL){
+
+                printf("Cliente %d:\n\n", i);
+                printf("Nome: %s", nolistacliente->pessoa.nome);
+                printf("CPF: %s\n", nolistacliente->pessoa.cpf);
+                printf("\n");
+                nolistacliente = nolistacliente->prox;
+                i++;
+
+            }
+        }
+    }
+}
+
+
+
+void mostrarlistaclienteClienteNome(listacliente *l, char *nome){
+
+    if(l != NULL){
+
+        printf("listacliente de Clientes com nome %s:\n\n", nome);
+
+        if(listaclienteVazia(l) != 0){
+
+            No *nolistacliente = l->inicio;
+            int i = 1;
+
+            while(nolistacliente != NULL){
+
+                if(strcmp(nolistacliente->pessoa.nome, nome) == 0){
+
+                printf("Cliente %d:\n", i);
+                printf("Nome: %s\n", nolistacliente->pessoa.nome);
+                printf("CPF: %s\n", nolistacliente->pessoa.cpf);
+                printf("\n");
+                i++;
+
+                }
+
+                nolistacliente = nolistacliente->prox;
+
+            }
+        }
+    }
+}
+
+
+
