@@ -1,96 +1,12 @@
-#include "asd.h"
+#include "gerenciador.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 
-
-
-
-
 //// TADS
-typedef struct cliente{
 
-    char nome[50];
-    char cpf[15];
-    char endereco[50];
-    char email[40];
-
-}Cliente;
-
-typedef struct no{
-
-    Cliente pessoa;
-    struct no *prox;
-
-}No;
-typedef struct listacliente{
-
-    No *inicio;
-
-}listacliente;
-
-
-struct Lote
-{
-
-    int id; // CODIGO DE IDENTIFICA��O DO LOTE. N�O REPRESENTA NADA ALEM DE IDENTIFICA��O.
-    int tamanho; // DADOS               // (C�DIGO �NICO DE CADA LOTE, MESMO QUE EXCLUIDO)
-    char rua[50]; // DO
-    int quadra;   // LOTE
-    int num;
-    int status; // SITUA��O ATUAL DO LOTE (1 - LIVRE, 2 - RESERVADO, 3 -  VENDIDO);
-    char* cliente;
-    char* creci; // CORRETOR RESPONSAVEL
-    float preco;
-};
-typedef struct Lote lote;
-
-
-// N� DA LISTA
-typedef struct nolote
-{
-    lote valor;
-    nolote* prox;
-} nolote;
-
-
-// TIPO LISTA DE LOTES
-typedef struct listaLotes
-{
-    nolote* inicio;
-    int cod; // VARIAVEL PARA CONTROLE DE LOTES E PARA ATRIBUIR OS C�DIGOS DE CADA LOTE.
-}listalotes;
-
-struct Corretor
-{
-    char nome[50];
-    char cpf[15];
-    char email[50];
-    char endereco[50];
-    char senha[30];
-    char creci[20];
-};
-
-typedef struct Corretor corretor;
-
-struct NO {
-    struct Corretor valor;
-    struct NO *prox;
-};
-
-typedef struct NO no;
-
-struct Lista {
-    struct NO *inicio;
-};
-
-
-
-
-
-
-
+typedef struct cliente cliente;
 
 typedef Cliente cliente;
 
@@ -127,8 +43,10 @@ int inserelote(listalotes* l, lote a){
     if(l == NULL) return 0;
     nolote* nolotevoLote = (nolote*)malloc(sizeof(nolote));
     nolotevoLote->valor = a;
+    nolotevoLote->valor.id = l->cod;
     nolotevoLote->prox = NULL;
-    nolotevoLote->valor.creci = 0;
+
+    nolotevoLote->valor.creci = (char*) malloc (sizeof(char)*20);
     nolotevoLote->valor.cliente = " ";
     nolotevoLote->valor.preco = 0;
 
@@ -162,7 +80,6 @@ int inserelote(listalotes* l, lote a){
 int buscalote(listalotes* l, lote a)
 {
     if(l == NULL) return 0;
-    if(listavazia(l)) return 0;
     nolote* cl = l->inicio;
     while(cl!=NULL)
     {
@@ -179,7 +96,6 @@ int buscalote(listalotes* l, lote a)
 int statuslote(listalotes* l, int id)
 {
     if(l == NULL) return 0;
-    if(listavazia(l)) return 0;
     nolote* cl = l->inicio;
     while(cl!=NULL)
     {
@@ -197,7 +113,6 @@ int statuslote(listalotes* l, int id)
 int mudastatus(listalotes* l, int id, int status)
 {
     if(l == NULL) return 0;
-    if(listavazia(l)) return 0;
     nolote* cl = l->inicio;
     while(cl!=NULL)
     {
@@ -218,7 +133,6 @@ int mudastatus(listalotes* l, int id, int status)
 int removelote(listalotes* l, int id)
 {
     if(l == NULL) return 0;
-    if(listavazia(l)) return 0;
     nolote* cl = l->inicio;
     if((cl->valor.id) == id){
         l->inicio = cl->prox;
@@ -249,8 +163,10 @@ void mostrarlotes(listalotes* l)
         nolote* a = l->inicio;
         char* aux = (char*) malloc(sizeof(char)*21);
 
+
         while(a != NULL)
         {
+            /*
             int verificador = 0;
             for(int i=0; i<20; i++)  // FORMATA A RUA EM UM NUMERO MAXIMO DE CARACTERES
             {
@@ -262,9 +178,10 @@ void mostrarlotes(listalotes* l)
                 }
                 aux[i] = a->valor.rua[i];
             }
-            aux[20] = '\0';
+            aux[20] = '\0';*/
 
-            printf("[%d] [%s] [%d] [%d] [%d] [%s] [%d]\n", a->valor.id, aux, a->valor.quadra, a->valor.num, a->valor.status, a->valor.cliente, a->valor.creci);
+
+            printf("[%d] [%s] [%d] [%d] [%d] [%s] [%s]\n", a->valor.id, a->valor.rua, a->valor.quadra, a->valor.num, a->valor.status, a->valor.cliente, a->valor.creci);
             a = a->prox;
         }
     }
@@ -524,17 +441,23 @@ void mostracliente(listalotes* l, cliente b){
 }
 
 // FUN��O QUE ALTERA UM LOTE COMO VENDIDO
-int lotevendido(listalotes* l, int id, cliente a, char* creci, float preco){
+int lotevendido(listalotes* l, int id, Cliente a, char* creci, float preco){
     if(l == NULL) return 0;
-    if(listavazia(l)) return 0;
     nolote* cl = l->inicio;
+    printf("entrei aqui");
+    sleep(10);
     while(cl!=NULL)
     {
         if((cl->valor).id == id) {
             cl->valor.status = 3;
+            printf("1");
             cl->valor.cliente = a.nome;
+            printf("2");
             strcpy(cl->valor.creci, creci);
+            printf("3");
             cl->valor.preco = preco;
+
+            printf("entrei aqui");
             return 1;
         }
         cl = cl->prox;
@@ -546,8 +469,10 @@ int lotevendido(listalotes* l, int id, cliente a, char* creci, float preco){
 
 
 int listaVazia (lista *l) {
+
     if (l == NULL) return -1;
-    if (l->inicio == NULL) return 1;
+    if (l->inicio == NULL) return 0;
+
 }
 
 lista * criarlistacorretor() {
@@ -572,16 +497,30 @@ int tamanhoUsuario (lista *l) {
 }
 
 int novoCadastro (lista *l, corretor c) {
-    if (l == NULL) return -1;
-    no *noLista = l->inicio;
-    while (noLista-> prox != NULL) {
-        noLista = noLista->prox;
+    if (l == NULL) return 2;
+
+    struct NO *nonl = (struct NO*) malloc(sizeof(no));
+    nonl->valor = c;
+    nonl->prox = NULL;
+
+    if(listaVazia(l) == 0){
+
+        l->inicio = nonl;
+        return 0;
+
     }
-    no* no = (struct NO*) malloc(sizeof(no));
-    no->valor = c;
-    no->prox = NULL;
-    noLista->prox = no;
-    return 1;
+
+    struct NO *noLista = l->inicio;
+
+    while(noLista->prox != NULL){
+
+        noLista = noLista->prox;
+
+    }
+
+    noLista->prox = nonl;
+
+    return 0;
 }
 
 int existeCadastro (lista *l, char* email) {
@@ -615,14 +554,12 @@ void visualizarUsuarios (lista *l) {
 
 int VerificaUsuario(lista* l, char* usuario, char* senha){
     if(l == NULL) return -1;
-    if(listaVazia(l)) return 0;
-    if(existeCadastro(l, usuario)){
-    no* aux = l->inicio;
+    no *aux = l->inicio;
     while(aux != NULL){
-    if(strcmp(aux->valor.email, usuario)==0) return 1;
+    if(strcmp(aux->valor.email, usuario) == 0) return 1;
     aux = aux->prox;
     }
-    }
+
     return 0;
 }
 
@@ -648,7 +585,7 @@ return 0;
 //CLIENTE////////////////////////////////////////////////////////////////////
 
 
-listacliente *criar(){
+listacliente *criarlistacliente(){
 
     listacliente *l = (listacliente*) malloc(sizeof(listacliente));
 
@@ -801,8 +738,6 @@ int ordemAlfabetica(listacliente *l){
     return 0;
 
 }
-
-
 
 int removerClienteCPF(listacliente *l, char *cpf){
 
@@ -974,6 +909,7 @@ int retornaClienteCPF(listacliente *l, Cliente *retorno, char *cpf){
         if(strcmp(nolistacliente->pessoa.cpf, cpf) == 0){
 
             *retorno = nolistacliente->pessoa;
+
             return 0;
 
         }
@@ -1032,8 +968,6 @@ void mostrar(listacliente *l){
     }
 }
 
-
-
 void mostrarlistaclienteClienteNome(listacliente *l, char *nome){
 
     if(l != NULL){
@@ -1063,6 +997,3 @@ void mostrarlistaclienteClienteNome(listacliente *l, char *nome){
         }
     }
 }
-
-
-
