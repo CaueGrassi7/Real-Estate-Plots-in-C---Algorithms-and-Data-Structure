@@ -394,7 +394,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
     int formaDePagamento, confirmacao;
     int idLote;
     char cpfCliente[15];
-    lote *loteaux;
+    int tamanhoDoLote;
     Cliente *clienteaux;
     clienteaux = (Cliente*) malloc(sizeof(Cliente));
 
@@ -419,7 +419,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
             removeespaco(cpfCliente);
 
             retornaClienteCPF(b, clienteaux, cpfCliente);
-            printf("caiu\n");
+            
 
             //Dados dos lotes
             printf("\nLista de lotes disponiveis:\n");
@@ -437,10 +437,8 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
             getchar();
 
             //Valor do lote
-            lote loteamento;
-
-            //    precoBruto = (valorDoMetro * (a->lote->area));
-            precoBruto = 1;
+            tamanhoDoLote = tamanholote(a, idLote);
+            precoBruto = valorDoMetro * tamanhoDoLote;
 
             //Formas de pagamento
 
@@ -520,8 +518,6 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
                 {
                     if ((lotevendido(a, idLote, *clienteaux, corretorr.creci, valorVendido)))
                     {
-                        printf("entrei aqui");
-                        sleep(10);
                         printf("Venda realizada com sucesso\n");
                         op = 0;
                         return 0;
@@ -534,7 +530,6 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
                     }
                 }
             }
-            printf("FUDEU");
             break;
         case 2:
             system("cls");
