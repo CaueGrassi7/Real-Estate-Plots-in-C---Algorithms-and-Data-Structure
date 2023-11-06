@@ -48,9 +48,10 @@ int inserelote(listalotes* l, lote a)
     nolotevoLote->prox = NULL;
 
     nolotevoLote->valor.creci = (char*) malloc (sizeof(char)*20);
-    nolotevoLote->valor.creci[0] = " ";
+    nolotevoLote->valor.creci[0] = ' ';
     nolotevoLote->valor.creci[1] = '\0';
-    nolotevoLote->valor.cliente = " ";
+    nolotevoLote->valor.cliente[0] = ' ';
+    nolotevoLote->valor.cliente[1] = '\0';
     nolotevoLote->valor.preco = 0;
 
     if (l->inicio == NULL || strcmp(a.rua, l->inicio->valor.rua) < 0)
@@ -177,7 +178,7 @@ void mostrarlotes(listalotes* l)
 
         while(a != NULL)
         {
-            
+
             int verificador = 0;
             for(int i=0; i<20; i++)  // FORMATA A RUA EM UM NUMERO MAXIMO DE CARACTERES
             {
@@ -460,21 +461,15 @@ int lotevendido(listalotes* l, int id, Cliente a, char* creci, float preco)
 {
     if(l == NULL) return 0;
     nolote* cl = l->inicio;
-    printf("entrei aqui");
-    sleep(10);
     while(cl!=NULL)
     {
         if((cl->valor).id == id)
         {
             cl->valor.status = 3;
-            printf("1");
-            cl->valor.cliente = a.nome;
-            printf("2");
+            strcpy(cl->valor.cliente, a.nome);
             strcpy(cl->valor.creci, creci);
-            printf("3");
             cl->valor.preco = preco;
 
-            printf("entrei aqui");
             return 1;
         }
         cl = cl->prox;
@@ -1053,7 +1048,7 @@ void mostrar(listacliente *l)
             {
 
                 printf("Cliente %d:\n\n", i);
-                printf("Nome: %s", nolistacliente->pessoa.nome);
+                printf("Nome: %s\n", nolistacliente->pessoa.nome);
                 printf("CPF: %s\n", nolistacliente->pessoa.cpf);
                 printf("\n");
                 nolistacliente = nolistacliente->prox;

@@ -50,7 +50,7 @@ struct Lote{
     int quadra;   // LOTE
     int num;
     int status; // SITUACAO ATUAL DO LOTE (1 - LIVRE, 2 - RESERVADO, 3 -  VENDIDO);
-    char* cliente;
+    char cliente[50];
     char* creci; // CORRETOR RESPONSAVEL
     float preco;
 

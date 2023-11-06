@@ -152,8 +152,11 @@ int cadastrarlote(listalotes* l)
     scanf("%d", &aux);
     getchar();
     a.num = aux;
+    printf("Qual o tamanho em metro quadrado do lote cadastrado?\n");
+    scanf("%d", &aux);
+    getchar();
+    a.tamanho = aux;
     a.status = 1;
-    a.cliente = (char*) calloc (30, sizeof(char));
     a.creci = (char*) calloc (30, sizeof(char));
     if(inserelote(l, a))printf("Lote cadastrado com sucesso!\n");
 
@@ -400,6 +403,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
 
     do
     {
+        system("cls");
         printf("\n1 - Realizar venda\n");
         printf("2 - Verificar lotes reservados\n");
         printf("0 - Sair\n");
@@ -411,7 +415,6 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
             system("cls");
 
             //Dados dos clientes
-            printf("\nLista de clientes:\n");
             mostrar(b);
             printf("CPF do cliente: ");
             setbuf(stdin, NULL);
@@ -419,7 +422,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
             removeespaco(cpfCliente);
 
             retornaClienteCPF(b, clienteaux, cpfCliente);
-            
+
 
             //Dados dos lotes
             printf("\nLista de lotes disponiveis:\n");
@@ -535,6 +538,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
             system("cls");
             printf("\nLista de lotes reservados:\n");
             mostrarreservados(a);
+            sleep(10);
             break;
 
         default:
@@ -572,7 +576,7 @@ int FaturamentoCorretor(corretor corretorr, listalotes* a)
 
 float FaturamentoTotal(listalotes* a)
 {
-
+    system("cls");
     if (a == NULL) return -1;
     float v = 0;
     nolote* cl = a->inicio;
