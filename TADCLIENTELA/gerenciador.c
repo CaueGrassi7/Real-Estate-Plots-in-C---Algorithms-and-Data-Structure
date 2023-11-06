@@ -1063,38 +1063,3 @@ void mostrar(listacliente *l)
         }
     }
 }
-
-void mostrarlistaclienteClienteNome(listacliente *l, char *nome)
-{
-
-    if(l != NULL)
-    {
-
-        printf("listacliente de Clientes com nome %s:\n\n", nome);
-
-        if(listaclienteVazia(l) != 0)
-        {
-
-            No *nolistacliente = l->inicio;
-            int i = 1;
-
-            while(nolistacliente != NULL)
-            {
-
-                if(strcmp(nolistacliente->pessoa.nome, nome) == 0)
-                {
-
-                    printf("Cliente %d:\n", i);
-                    printf("Nome: %s\n", nolistacliente->pessoa.nome);
-                    printf("CPF: %s\n", nolistacliente->pessoa.cpf);
-                    printf("\n");
-                    i++;
-
-                }
-
-                nolistacliente = nolistacliente->prox;
-
-            }
-        }
-    }
-}
