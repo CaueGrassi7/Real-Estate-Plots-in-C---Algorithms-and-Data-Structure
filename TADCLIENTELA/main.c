@@ -6,6 +6,10 @@
 
 int cadastrarlote(listalotes* l);
 
+void MostraLoteReservado(listalotes* l);
+
+void removeespaco(char* s);
+
 void IniciaLogin(listalotes* a, listacliente* b, lista* c, corretor corretorr);
 
 void MostraLote(listalotes* l);
@@ -38,20 +42,27 @@ int main()
     {
         system("cls");
         char email[40], senha[40];
-        printf("Seja bem vindo!\n\n1- Login\n2-Cadastro\n3- Sobre\n4- Sair\n");
+        printf("Seja bem vindo!\n\n1- Login\n2- Cadastro\n3- Sobre\n4- Sair\n");
         scanf("%d", &opcao);
+        getchar();
         if(opcao == 1)
         {
             system("cls");
             printf("Seja bem vindo novamente!\n\nInsira seu email:\n");
             scanf("%s", email);
+            getchar();
             printf("Ótimo! Agora, sua senha:\n");
             scanf("%s", senha);
+            getchar();
             if(VerificaUsuario(c, email, senha))
             {
                 corretor corretorr;
                 LoginUsuario(&corretorr, c, email);
                 IniciaLogin(a, b, c, corretorr);
+            }
+            else{
+                printf("Login Invalido!\n");
+                sleep(6);
             }
         }
 
@@ -61,13 +72,19 @@ int main()
             printf("Seja bem vindo!\n\nInsira seu email:\n");
             setbuf(stdin, NULL);
             scanf("%s", email);
+            getchar();
             printf("Ótimo! Agora, a senha que deseja utilizar:\n");
             setbuf(stdin, NULL);
             scanf("%s", senha);
+            getchar();
             Cadastro(c, email, senha);
         }
 
-        if(opcao == 3);
+        if(opcao == 3){
+            system("cls");
+            printf("Feito por:\n\nCaue Grassi, Enzo Faria, Malcon Rezende, Murilo Beppler\n");
+            sleep(10);
+        }
 
 
 
@@ -84,9 +101,9 @@ void IniciaLogin(listalotes* a, listacliente* b, lista* c, corretor corretorr)
     {
         system("cls");
         printf("Seja bem vindo %s!\n", corretorr.nome);
-        printf("O que voce deseja hoje?\n\n1- Cadastrar lote\n2- Gerenciar Clientes\n3- Ver lotes\n4- Simular Venda\n5- Vender Lote\n6- Ver meu faturamento\n7- Ver faturamento do empreendimento\n10- Sair\n");
-
+        printf("O que voce deseja hoje?\n\n1- Cadastrar lote\n2- Gerenciar Clientes\n3- Ver lotes\n4- Simular Venda\n5- Checar Reservados\n6- Ver meu faturamento\n7- Ver faturamento do empreendimento\n10- Sair\n");
         scanf("%d", &opc);
+        getchar();
 
         if(opc == 1)      cadastrarlote(a); // (FEITO)
 
@@ -96,7 +113,7 @@ void IniciaLogin(listalotes* a, listacliente* b, lista* c, corretor corretorr)
 
         else if(opc == 4) Simulador(a, b, corretorr);
 
-        //else if(opc == 5) Venda(a, b, corretorr);
+        else if(opc == 5) MostraLoteReservado(a);
 
         else if(opc == 6) FaturamentoCorretor(corretorr, a); // FEITO
 
@@ -125,12 +142,15 @@ int cadastrarlote(listalotes* l)
     printf("Qual a rua onde se encontra o lote?\n");
     setbuf(stdin, NULL);
     fgets(buffer, 49, stdin);
+    removeespaco(buffer);
     strcpy(a.rua, buffer);
     printf("Qual a quadra onde se encontra o lote?\n");
     scanf("%d", &aux);
+    getchar();
     a.quadra = aux;
     printf("E qual o numero do lote?\n");
     scanf("%d", &aux);
+    getchar();
     a.num = aux;
     a.status = 1;
     a.cliente = (char*) calloc (30, sizeof(char));
@@ -139,6 +159,7 @@ int cadastrarlote(listalotes* l)
 
     printf("Deseja continuar cadastrando?\n1-Sim\n2-Nao\n");
     scanf("%d", &aux);
+    getchar();
     if(aux == 1) return cadastrarlote(l);
 
     return 0;
@@ -153,8 +174,43 @@ void MostraLote(listalotes* l)
     mostrarlotes(l);
     printf("0 - Voltar\n");
     scanf("%d", &opc);
+    getchar();
     if(opc == 0) return 0;
     else return MostraLote(l);
+
+
+}
+
+void MostraLoteReservado(listalotes* l)
+{
+
+    system("cls");
+    int opc;
+    mostrarreservados(l);
+    printf("Deseja Reservar algum lote?\n1- Sim\n2- Remover Reserva\n0 - Voltar\n");
+    scanf("%d", &opc);
+    getchar();
+
+    if(opc == 1){
+
+        system("cls");
+        mostrardisponivel(l);
+        printf("Escreva o id do lote a ser reservado:\n");
+        scanf("%d", &opc);
+        mudastatus(l, opc, 2);
+        printf("aa");
+        return 1;
+    }
+    if(opc == 2){
+
+        printf("Escreva o id do lote a ser liberado:\n");
+        scanf("%d", &opc);
+        mudastatus(l, opc, 1);
+    }
+
+    if(opc == 0) return 0;
+    else return MostraLote(l);
+
 
 
 }
@@ -175,15 +231,19 @@ int cadastrarCliente(listacliente *b)
     printf("\nDigite o NOME COMPLETO do cliente: ");
     setbuf(stdin, NULL);
     fgets(a.nome, 50, stdin);
+    removeespaco(a.nome);
     printf("\nDigite o CPF do cliente (ex: 12345678910): ");
     setbuf(stdin, NULL);
     fgets(a.cpf, 15, stdin);
+    removeespaco(a.cpf);
     printf("\nDigite o endereco do cliente (ex: rua/avenida numero): ");
     setbuf(stdin, NULL);
     fgets(a.endereco, 40, stdin);
+    removeespaco(a.endereco);
     printf("\nDigite o email do cliente (ex: nome@gmail.com): ");
     setbuf(stdin, NULL);
     fgets(a.email, 40, stdin);
+    removeespaco(a.email);
 
     if(adicionarClienteFinal(b, a) == 0)
         printf("\nCliente cadastrado com sucesso!\n\n");
@@ -192,6 +252,7 @@ int cadastrarCliente(listacliente *b)
 
     printf("Deseja cadastrar outro cliente:\n1 - sim\n2 - nao\nopcao: ");
     scanf("%d", &op);
+    getchar();
 
     if(op == 1)
     {
@@ -221,6 +282,7 @@ void mostrarCliente(listacliente* b)
     printf("0 - Voltar\n");
     printf("opcao: ");
     scanf("%d", &op);
+    getchar();
 
     if(op == 0) return 0;
     else return mostrarCliente(b);
@@ -238,6 +300,7 @@ int gerenciarClientes(listacliente *b)
     printf("1 - Adicionar cliente\n2 - Remover cliente\n3 - Mostrar clientes\n4 - Verificar cliente\n5 - Voltar\n");
     printf("opcao: ");
     scanf("%d", &op);
+    getchar();
 
     if(op == 1)
     {
@@ -257,12 +320,14 @@ int gerenciarClientes(listacliente *b)
         printf("Digite o cpf do cliente que deseja remover: ");
         setbuf(stdin, NULL);
         fgets(cpf, 15, stdin);
+        removeespaco(cpf);
         if(removerClienteCPF(b, cpf) == 1) printf("\nCPF nao encontrado\n");
         else printf("\nCliente removido com sucesso!\n");
 
         printf("\n0 - Voltar\n");
         printf("opcao: ");
         scanf("%d", &op);
+        getchar();
 
         return gerenciarClientes(b);
 
@@ -284,12 +349,14 @@ int gerenciarClientes(listacliente *b)
         printf("Digite o cpf do cliente: ");
         setbuf(stdin, NULL);
         fgets(cpf, 15, stdin);
+        removeespaco(cpf);
         if(existeClienteCPF(b, cpf) == 1) printf("\nCPF nao encontrado");
         else printf("\nO Cliente ja esta cadastrado");
 
         printf("\n0 - Voltar\n");
         printf("\nopcao: ");
         scanf("%d", &op);
+        getchar();
 
         return gerenciarClientes(b);
 
@@ -309,6 +376,7 @@ int gerenciarClientes(listacliente *b)
         printf("\n0 - Continuar");
         printf("\nopcao: ");
         scanf("%d", &i);
+        getchar();
         return gerenciarClientes(b);
 
     }
@@ -336,6 +404,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
         printf("2 - Verificar lotes reservados\n");
         printf("0 - Sair\n");
         scanf("%d", &op);
+        getchar();
         switch (op)
         {
         case 1:
@@ -347,6 +416,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
             printf("CPF do cliente: ");
             setbuf(stdin, NULL);
             fgets(cpfCliente, 15, stdin);
+            removeespaco(cpfCliente);
 
             retornaClienteCPF(b, clienteaux, cpfCliente);
             printf("caiu\n");
@@ -357,12 +427,14 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
             printf("ID do lote: ");
             setbuf(stdin, NULL);
             scanf("%d", &idLote);
+            getchar();
 
 
             //Orçamento do lote
             printf("Valor do metro quadrado do lote: ");
             setbuf(stdin, NULL);
             scanf("%f", &valorDoMetro);
+            getchar();
 
             //Valor do lote
             lote loteamento;
@@ -389,6 +461,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
             printf("0 - Sair\n");
             setbuf(stdin, NULL);
             scanf("%d", &formaDePagamento);
+            getchar();
             switch (formaDePagamento)
             {
             case 1:
@@ -442,6 +515,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
                 printf("2 - Nao\n");
                 setbuf(stdin, NULL);
                 scanf("%d", &confirmacao);
+                getchar();
                 if (confirmacao == 1)
                 {
                     if ((lotevendido(a, idLote, *clienteaux, corretorr.creci, valorVendido)))
@@ -495,6 +569,7 @@ int FaturamentoCorretor(corretor corretorr, listalotes* a)
     }
     printf("Seu faturamento total foi de R$ %f\n\n\n\n\nDigite qualquer numero para sair\n", v);
     scanf("%f", &v);
+    getchar();
 
     return 1;
 
@@ -515,7 +590,7 @@ float FaturamentoTotal(listalotes* a)
     }
     printf("O faturamento total do empreendimento foi de R$ %f\n\n\n\n\nDigite qualquer numero para sair\n", v);
     scanf("%f", &v);
-
+    getchar();
 
     return 1;
 
@@ -534,19 +609,29 @@ void Cadastro(lista* l, char* email, char* senha)
     printf("Qual seu nome completo?\n");
     setbuf(stdin, NULL);
     fgets(aux, 49, stdin);
+    removeespaco(aux);
     strcpy(a.nome, aux);
     printf("Me informe agora seu endereco\n");
     setbuf(stdin, NULL);
     fgets(aux, 50, stdin);
+    removeespaco(aux);
     strcpy(a.endereco, aux);
     printf("Me informe agora seu cpf (SOMENTE NUMEROS):\n");
     setbuf(stdin, NULL);
     fgets(aux, 15, stdin);
+    removeespaco(aux);
     strcpy(a.cpf, aux);
     printf("Por ultimo, favor informe seu CRECI:\n");
     setbuf(stdin, NULL);
     fgets(aux, 19, stdin);
+    removeespaco(aux);
     strcpy(a.creci, aux);
     printf("Otimo! Realizando Cadastro...\n\n\n");
     novoCadastro(l, a);
+}
+
+void removeespaco(char* s){
+
+    s[(strlen(s)-1)] = '\0';
+
 }

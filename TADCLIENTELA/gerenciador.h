@@ -1,6 +1,7 @@
 #ifndef GERENCIADOR_H_INCLUDED
 #define GERENCIADOR_H_INCLUDED
 
+
 typedef struct Lote lote;
 
 typedef struct nolote nolote;
@@ -116,6 +117,7 @@ void mostraid(listalotes* l, int id);
 void mostracorretor(listalotes* l, char* creci);
 void mostracliente(listalotes* l, Cliente a);
 int lotevendido(listalotes* l, int id, Cliente a, char* creci, float preco);
+int tamanholote(listalotes* l, int id);
 
 
 //TAD USUARIO //////////////////////////////////////////////////////////////////////////
@@ -152,5 +154,6 @@ int retornaClienteCPF(listacliente *l, Cliente *retorno, char *cpf);
 int tamanho(listacliente *l);
 void mostrar(listacliente *l);
 void mostrarlistaclienteClienteNome(listacliente *l, char *nome);
+
 
 #endif // GERENCIADOR_H_INCLUDED

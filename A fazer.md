@@ -1,10 +1,11 @@
 
 ##A fazer
 
-- [ ] Tirar o enter dos printf (string)
-- [ ] função buscar lote pelo id (para chegar no tamanho)
+- [X] Tirar o enter dos printf (string)
+- [X] função retorna tamanho lote pelo id
 - [ ] pilha 
 - [ ] comentar o código
-- [ ] sobre 
+- [X] sobre 
 - [ ] organizar para enviar
 - [ ] frees
+- [X] colocar opção reservar lote na main
