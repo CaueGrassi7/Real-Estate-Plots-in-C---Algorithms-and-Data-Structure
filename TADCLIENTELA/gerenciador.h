@@ -1,12 +1,13 @@
 #ifndef GERENCIADOR_H_INCLUDED
 #define GERENCIADOR_H_INCLUDED
 
-
 typedef struct Lote lote;
 
 typedef struct nolote nolote;
 
 typedef struct listaLotes listalotes;
+
+typedef struct listacliente listacliente;
 
 typedef struct Corretor corretor;
 
@@ -41,48 +42,47 @@ typedef struct listacliente{
 }listacliente;
 
 
-struct Lote
-{
+struct Lote{
 
-    int id; // CODIGO DE IDENTIFICA��O DO LOTE. N�O REPRESENTA NADA ALEM DE IDENTIFICA��O.
-    int tamanho; // DADOS               // (C�DIGO �NICO DE CADA LOTE, MESMO QUE EXCLUIDO)
+    int id; // CODIGO DE IDENTIFICACAO DO LOTE. NAO REPRESENTA NADA ALEM DE IDENTIFICACAO.
+    int tamanho; // DADOS               // (CODIGO UNICO DE CADA LOTE, MESMO QUE EXCLUIDO)
     char rua[50]; // DO
     int quadra;   // LOTE
     int num;
-    int status; // SITUA��O ATUAL DO LOTE (1 - LIVRE, 2 - RESERVADO, 3 -  VENDIDO);
+    int status; // SITUACAO ATUAL DO LOTE (1 - LIVRE, 2 - RESERVADO, 3 -  VENDIDO);
     char* cliente;
     char* creci; // CORRETOR RESPONSAVEL
     float preco;
+
 };
-typedef struct Lote lote;
 
+// NO DA LISTA
+typedef struct nolote{
 
-// N� DA LISTA
-typedef struct nolote
-{
     lote valor;
     nolote* prox;
-} nolote;
+
+}nolote;
 
 
 // TIPO LISTA DE LOTES
-typedef struct listaLotes
-{
+typedef struct listaLotes{
+
     nolote* inicio;
     int cod; // VARIAVEL PARA CONTROLE DE LOTES E PARA ATRIBUIR OS C�DIGOS DE CADA LOTE.
+
 }listalotes;
 
-struct Corretor
-{
+struct Corretor{
+
     char nome[50];
     char cpf[15];
     char email[50];
     char endereco[50];
     char senha[30];
     char creci[20];
-};
 
-typedef struct Corretor corretor;
+}Corretor;
 
 struct NO {
 
@@ -91,13 +91,9 @@ struct NO {
 
 };
 
-typedef struct NO no;
-
 struct Lista {
     struct NO *inicio;
 };
-
-typedef struct listacliente listacliente;
 
 //TAD LOTES //////////////////////////////////////////////////////////////////////////
 
@@ -153,7 +149,5 @@ int existeClienteCPF(listacliente *l, char *cpf);
 int retornaClienteCPF(listacliente *l, Cliente *retorno, char *cpf);
 int tamanho(listacliente *l);
 void mostrar(listacliente *l);
-void mostrarlistaclienteClienteNome(listacliente *l, char *nome);
-
 
 #endif // GERENCIADOR_H_INCLUDED
