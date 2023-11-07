@@ -498,17 +498,7 @@ int tamanholote(listalotes* l, int id)
 }
 //USUARIO////////////////////////////////////////////////////////////////////
 
-
-int listaVazia (lista *l)
-{
-
-    if (l == NULL) return -1;
-    if (l->inicio == NULL) return 0;
-
-}
-
-lista * criarlistacorretor()
-{
+lista * criarlistacorretor(){ //CRIA LISTA ENCADEADA DE USUARIOS
     lista *l = (lista*) malloc(sizeof(lista));
     if (l != NULL)
     {
@@ -517,8 +507,14 @@ lista * criarlistacorretor()
     return l;
 }
 
-int tamanhoUsuario (lista *l)
-{
+int listaVazia(lista *l){ //LISTA ENCADEADA VAZIA DE USUARIOS
+
+    if (l == NULL) return -1;
+    if (l->inicio == NULL) return 0;
+
+}
+
+int tamanhoUsuario (lista *l){ //TAMANHO LISTA ENCADEADA DE USUARIOS
     if (l == NULL)
     {
         return -1;
@@ -533,8 +529,7 @@ int tamanhoUsuario (lista *l)
     return cont;
 }
 
-int novoCadastro (lista *l, corretor c)
-{
+int novoCadastro (lista *l, corretor c){ //ADICIONA UM NOVO CADASTRO, OU SEJA, ADICIONA UM NOVO USUARIO A LISTA ENCADEADA
     if (l == NULL) return 2;
 
     struct NO *nonl = (struct NO*) malloc(sizeof(no));
@@ -563,8 +558,7 @@ int novoCadastro (lista *l, corretor c)
     return 0;
 }
 
-int existeCadastro (lista *l, char* email)
-{
+int existeCadastro (lista *l, char* email){ //VERIFICA SE O USUARIO JA EXISTE NA LISTA ENCADEADA
     if (l == NULL) return -1;
     no *noLista = l->inicio;
     while (noLista != NULL)
@@ -581,8 +575,7 @@ int existeCadastro (lista *l, char* email)
 }
 
 
-void visualizarUsuarios (lista *l)
-{
+void visualizarUsuarios (lista *l){ //VISUALIZAR LISTA ENCADEADA DE USUARIOS
     if (l != NULL)
     {
         printf ("[");
@@ -598,8 +591,7 @@ void visualizarUsuarios (lista *l)
     }
 }
 
-int VerificaUsuario(lista* l, char* usuario, char* senha)
-{
+int VerificaUsuario(lista* l, char* usuario, char* senha){
     if(l == NULL) return -1;
     no *aux = l->inicio;
     while(aux != NULL)
@@ -636,13 +628,11 @@ int LoginUsuario(corretor* a, lista* l, char* email)
 //CLIENTE////////////////////////////////////////////////////////////////////
 
 
-listacliente *criarlistacliente()
-{
+listacliente *criarlistacliente(){ //CRIAR LISTA ENCADEADA DE CLIENTES
 
     listacliente *l = (listacliente*) malloc(sizeof(listacliente));
 
-    if(l != NULL)
-    {
+    if(l != NULL){
 
         l->inicio = NULL;
 
@@ -651,10 +641,7 @@ listacliente *criarlistacliente()
     return l;
 }
 
-
-
-int listaclienteVazia(listacliente *l)
-{
+int listaclienteVazia(listacliente *l){ //LISTA DE CLIENTES VAZIA
 
     if(l == NULL) return 2;
     if(l->inicio == NULL) return 0;
@@ -664,20 +651,16 @@ int listaclienteVazia(listacliente *l)
 
 
 
-int listaclienteCheia(listacliente *l)
+int listaclienteCheia(listacliente *l) //LISTA DE CLIENTES CHEIA (MODELO TAD)
 {
 
     return 1;
 
 }
 
+void limpar(listacliente *l){ //LIMPAR LISTA DE CLIENTES
 
-
-void limpar(listacliente *l)
-{
-
-    while(listaclienteVazia(l) != 0)
-    {
+    while(listaclienteVazia(l) != 0){
 
         removerClienteInicio(l);
 
@@ -685,10 +668,7 @@ void limpar(listacliente *l)
 
 }
 
-
-
-int adicionarClienteInicio(listacliente *l, Cliente c)
-{
+int adicionarClienteInicio(listacliente *l, Cliente c){ //ADICIONA CLIENTE NO INICIO DA LISTA ENCADEADA DE CLIENTES
 
     if(l == NULL) return 2;
     if(listaclienteCheia(l) == 0) return -1;
@@ -702,10 +682,7 @@ int adicionarClienteInicio(listacliente *l, Cliente c)
     return 0;
 }
 
-
-
-int adicionarClienteFinal(listacliente *l, Cliente c)
-{
+int adicionarClienteFinal(listacliente *l, Cliente c){ //ADICIONA CLIENTE NO FINAL DA LISTA ENCADEADA DE CLIENTES
 
     if(l == NULL) return 2;
     if(listaclienteCheia(l) == 0) return -1;
@@ -736,10 +713,7 @@ int adicionarClienteFinal(listacliente *l, Cliente c)
     return 0;
 }
 
-
-
-int adicionarClientePosicao(listacliente *l, Cliente c, int pos)
-{
+int adicionarClientePosicao(listacliente *l, Cliente c, int pos){ //ADICIONA CLIENTE EM DETERMINADA POSICAO
 
     if(l == NULL) return 2;
     if(listaclienteCheia(l) == 0) return 1;
@@ -772,10 +746,7 @@ int adicionarClientePosicao(listacliente *l, Cliente c, int pos)
     return 0;
 }
 
-
-
-int ordemAlfabetica(listacliente *l)
-{
+int ordemAlfabetica(listacliente *l){ //ORGANIZA OS CLIENTES ALFABETICAMENTE NA LISTA ENCADEADA DE CLIENTES
 
     if(l == NULL) return 2;
     if(listaclienteVazia(l) == 0) return 1; //N�o h� o que ordenar
@@ -806,8 +777,7 @@ int ordemAlfabetica(listacliente *l)
 
 }
 
-int removerClienteCPF(listacliente *l, char *cpf)
-{
+int removerClienteCPF(listacliente *l, char *cpf){ //ENCONTRA E REMOVE O CLIENTE PELO CPF
 
     if(l == NULL) return 2;
     if(listaclienteVazia(l) == 0) return 1;
@@ -854,8 +824,7 @@ int removerClienteCPF(listacliente *l, char *cpf)
 }
 
 
-int removerClientePosicao(listacliente *l, int pos)
-{
+int removerClientePosicao(listacliente *l, int pos){ //ENCONTRA E REMOVE O CLIENTE PELA POSICAO
 
     if(l == NULL) return 2;
     if(listaclienteVazia(l) == 0) return 1;
@@ -876,11 +845,6 @@ int removerClientePosicao(listacliente *l, int pos)
 
     }
 
-    /*
-    if(pos < p)
-        return -3; //posicao nao encontrada
-    */
-
     if(noAux == NULL)
     {
 
@@ -897,10 +861,7 @@ int removerClientePosicao(listacliente *l, int pos)
 
 }
 
-
-
-int existeClienteCPF(listacliente *l, char *cpf)
-{
+int existeClienteCPF(listacliente *l, char *cpf){ //VERIFICA SE DETERMINADO CPF DE CLIENTE JA EXISTE NA LISTA ENCADEADA DE CLIENTES
 
     if(l == NULL) return 2;
     if(listaclienteVazia(l) == 0) return 1;
@@ -925,10 +886,7 @@ int existeClienteCPF(listacliente *l, char *cpf)
 
 }
 
-
-
-int removerClienteInicio(listacliente *l)
-{
+int removerClienteInicio(listacliente *l){ //REMOVE CLIENTE DO INICIO DA LISTA ENCADEADA DE CLIENTES
 
     if(l == NULL) return 2;
     if(listaclienteVazia(l) == 0) return 1;
@@ -950,10 +908,7 @@ int removerClienteInicio(listacliente *l)
     return 0;
 }
 
-
-
-int removerClienteFinal(listacliente *l)
-{
+int removerClienteFinal(listacliente *l){ //REMOVE CLIENTE DO FINAL DA LISTA ENCADEADA DE CLIENTES
 
     if(l == NULL) return 2;
     if(listaclienteVazia(l) == 0) return 1;
@@ -979,8 +934,7 @@ int removerClienteFinal(listacliente *l)
 
 
 
-int retornaClienteCPF(listacliente *l, Cliente *retorno, char *cpf)
-{
+int retornaClienteCPF(listacliente *l, Cliente *retorno, char *cpf){ //ENCONTRA E RETORNA O CLIENTE PELO CPF
 
     if(l == NULL) return 2;
     if(listaclienteVazia(l) == 0) return 1;
@@ -1008,8 +962,7 @@ int retornaClienteCPF(listacliente *l, Cliente *retorno, char *cpf)
 
 
 
-int tamanho(listacliente *l)
-{
+int tamanho(listacliente *l){ //TAMANHO DA LISTA ENCADEADA DE CLIENTES
 
     if(l == NULL) return 2;
     if(listaclienteVazia(l) == 0) return 0;
@@ -1030,8 +983,7 @@ int tamanho(listacliente *l)
 
 
 
-void mostrar(listacliente *l)
-{
+void mostrar(listacliente *l){ //MOSTRAR LISTA ENCADEADA DE CLIENTES
 
     if(l != NULL)
     {

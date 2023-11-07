@@ -51,7 +51,7 @@ int main()
             printf("Seja bem vindo novamente!\n\nInsira seu email:\n");
             scanf("%s", email);
             getchar();
-            printf("Ótimo! Agora, sua senha:\n");
+            printf("Otimo! Agora, sua senha:\n");
             scanf("%s", senha);
             getchar();
             if(VerificaUsuario(c, email, senha))
@@ -73,7 +73,7 @@ int main()
             setbuf(stdin, NULL);
             scanf("%s", email);
             getchar();
-            printf("Ótimo! Agora, a senha que deseja utilizar:\n");
+            printf("Otimo! Agora, a senha que deseja utilizar:\n");
             setbuf(stdin, NULL);
             scanf("%s", senha);
             getchar();
@@ -93,8 +93,7 @@ int main()
 }
 
 
-void IniciaLogin(listalotes* a, listacliente* b, lista* c, corretor corretorr)
-{
+void IniciaLogin(listalotes* a, listacliente* b, lista* c, corretor corretorr){
 
     int opc = -1;
     while(opc!=10)
@@ -439,7 +438,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
                 printf("ID invalido\n");
                 sleep(5);
                 return 1;
-            }        
+            }
 
             //Orçamento do lote
             printf("\nValor do metro quadrado do lote: ");
