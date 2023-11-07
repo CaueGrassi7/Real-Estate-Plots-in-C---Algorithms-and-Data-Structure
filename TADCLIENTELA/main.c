@@ -420,24 +420,35 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
             setbuf(stdin, NULL);
             fgets(cpfCliente, 15, stdin);
             removeespaco(cpfCliente);
-
-            retornaClienteCPF(b, clienteaux, cpfCliente);
-
+            if(retornaClienteCPF(b, clienteaux, cpfCliente) == 1)
+            {
+                printf("\nCPF nao encontrado\n");
+                return 1;
+            }
 
             //Dados dos lotes
             printf("\nLista de lotes disponiveis:\n");
             mostrardisponivel(a);
-            printf("ID do lote: ");
+            printf("\nID do lote: ");
             setbuf(stdin, NULL);
             scanf("%d", &idLote);
             getchar();
-
+            if ((tamanholote(a, idLote)) == 0)
+            {
+                printf("ID invalido\n");
+                return 1;
+            }        
 
             //Orçamento do lote
-            printf("Valor do metro quadrado do lote: ");
+            printf("\nValor do metro quadrado do lote: ");
             setbuf(stdin, NULL);
             scanf("%f", &valorDoMetro);
             getchar();
+            if(((valorDoMetro) == 0) || ((valorDoMetro) < 0))
+            {
+                printf("Valor invalido\n");
+                return 1;
+            }
 
             //Valor do lote
             tamanhoDoLote = tamanholote(a, idLote);
