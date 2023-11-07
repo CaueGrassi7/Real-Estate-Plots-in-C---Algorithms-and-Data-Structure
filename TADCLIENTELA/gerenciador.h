@@ -7,7 +7,7 @@ typedef struct nolote nolote;
 
 typedef struct listaLotes listalotes;
 
-typedef struct listacliente listacliente;
+typedef struct listacliente listacliente; 
 
 typedef struct Corretor corretor;
 

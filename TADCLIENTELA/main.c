@@ -423,6 +423,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
             if(retornaClienteCPF(b, clienteaux, cpfCliente) == 1)
             {
                 printf("\nCPF nao encontrado\n");
+                sleep(5);
                 return 1;
             }
 
@@ -436,6 +437,7 @@ int Simulador(listalotes* a, listacliente* b, corretor corretorr)
             if ((tamanholote(a, idLote)) == 0)
             {
                 printf("ID invalido\n");
+                sleep(5);
                 return 1;
             }        
 
