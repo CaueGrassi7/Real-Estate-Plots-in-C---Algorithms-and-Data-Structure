@@ -1,6 +1,6 @@
 INTEGRANTES DO GRUPO -  GERENCIADOR DE LOTES IMOBILIARIOS
 
 Cauê Grassi Ribeiro da Silva  		12221BCC019
-Enzo Faria de Lacerda  			12221BCC010
-Malcon Rezende Rodrigues 		12211BCC034
-Murilo
+Enzo Faria de Lacerda  			      12221BCC010
+Malcon Rezende Rodrigues 	        12211BCC034
+Murilo ALves Beppler              12221BCC037
